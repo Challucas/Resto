@@ -30,13 +30,13 @@ public class IndexController {
     @FXML
     private Button buttonRoom;
 
-    public void goToHome(MouseEvent e) throws IOException {
+    public void goToHome(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         Parent home = loader.load();
         Scene sceneHome = new Scene(home);
         HomeController homeController = loader.getController();
 
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(sceneHome);
         stage.show();
     }
