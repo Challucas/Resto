@@ -20,13 +20,31 @@ import javafx.stage.Stage;
 public class lstReservController {
 
     private IndexController indexController;
+    
+    @FXML
+    private AnchorPane anchorMenu;
+
+    @FXML
+    private Button buttonHome;
+
+    @FXML
+    private Button buttonLstReserv;
+
+    @FXML
+    private Button buttonCreateReserv;
+
+    @FXML
+    private Button buttonRoom;
+
+    @FXML
+    private Button buttonHome1;
 
 
-    public void goToHome(MouseEvent e) {
+    public void goToHome(ActionEvent event) {
     	indexController = new IndexController();
     	System.out.println("ttttttttttttttttttttttt");
         try {
-			indexController.goToHome(e);
+			indexController.goToHome(event);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
