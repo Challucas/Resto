@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lstReservController">
+   <center>
+      <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
+         <children>
+            
+            <AnchorPane fx:id="anchorMenu" layoutX="-7.0" prefHeight="139.0" prefWidth="851.0" style="-fx-background-color: #a1a1a1;">
+               <children>
+                  <Button fx:id="buttonHome" layoutX="77.0" layoutY="57.0" mnemonicParsing="false" text="Accueil" />
+                  <Button fx:id="buttonLstReserv" layoutX="249.0" layoutY="57.0" mnemonicParsing="false" text="Liste des réservations" />
+                  <Button fx:id="buttonCreateReserv" layoutX="508.0" layoutY="57.0" mnemonicParsing="false" text="Créer une réservation" />
+                  <Button fx:id="buttonRoom" layoutX="756.0" layoutY="57.0" mnemonicParsing="false" text="Salle" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="buttonHome1" layoutX="227.0" layoutY="270.0" mnemonicParsing="false" text="Accueil" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
