@@ -10,12 +10,7 @@
          <children>
             
             <AnchorPane fx:id="anchorMenu" layoutX="-7.0" prefHeight="139.0" prefWidth="851.0" style="-fx-background-color: #a1a1a1;">
-               <children>
-                  <Button fx:id="buttonHome" layoutX="77.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#goToHome" text="Accueil" />
-                  <Button fx:id="buttonLstReserv" layoutX="249.0" layoutY="57.0" mnemonicParsing="false" text="Liste des réservations" />
-                  <Button fx:id="buttonCreateReserv" layoutX="508.0" layoutY="57.0" mnemonicParsing="false" text="Créer une réservation" />
-                  <Button fx:id="buttonRoom" layoutX="756.0" layoutY="57.0" mnemonicParsing="false" text="Salle" />
-               </children>
+            	<fx:include source="navMenu.fxml" />
             </AnchorPane>
          </children>
       </AnchorPane>

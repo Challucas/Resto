@@ -17,9 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class lstReservController {
+public class LstReservController {
 
-    private IndexController indexController;
     
     @FXML
     private AnchorPane anchorMenu;
@@ -40,14 +39,4 @@ public class lstReservController {
     private Button buttonHome1;
 
 
-    public void goToHome(ActionEvent event) {
-    	indexController = new IndexController();
-    	System.out.println("ttttttttttttttttttttttt");
-        try {
-			indexController.goToHome(event);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    }
 }
