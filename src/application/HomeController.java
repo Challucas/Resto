@@ -17,21 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class HomeController implements Initializable {
+public class HomeController {
 
-    private IndexController indexController;
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        try {
-            indexController = new IndexController();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle the exception appropriately
-        }
-    }
 
-    public void goToHome(ActionEvent event) throws IOException {
-        indexController.goToHome(event);
-    }
 }
