@@ -1,4 +1,4 @@
-package application;
+package modele;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,26 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class LstReservController {
+public class HomeController {
 
-    
-    @FXML
-    private AnchorPane anchorMenu;
-
-    @FXML
-    private Button buttonHome;
-
-    @FXML
-    private Button buttonLstReserv;
-
-    @FXML
-    private Button buttonCreateReserv;
-
-    @FXML
-    private Button buttonRoom;
-
-    @FXML
-    private Button buttonHome1;
 
 
 }

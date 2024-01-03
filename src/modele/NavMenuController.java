@@ -1,4 +1,4 @@
-package application;
+package modele;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class NavMenuController {
     private Button buttonRoom;
 
     public void goToHome(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
         Parent home = loader.load();
         Scene sceneHome = new Scene(home);
         HomeController homeController = loader.getController();
@@ -42,7 +42,7 @@ public class NavMenuController {
     }
     
     public void goTolstReserv(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("lstReserv.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/lstReserv.fxml"));
         Parent lstReserv = loader.load();
         Scene sceneLstReserv = new Scene(lstReserv);
         LstReservController lstReservController = loader.getController();
@@ -53,7 +53,7 @@ public class NavMenuController {
     }
     
     public void goToCreateReserv(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("createReserv.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/createReserv.fxml"));
         Parent createReserv = loader.load();
         Scene sceneCreateReserv = new Scene(createReserv);
         CreateReservController createReservController = loader.getController();
@@ -64,7 +64,7 @@ public class NavMenuController {
     }
     
     public void goToRoom(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("room.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/room.fxml"));
         Parent room = loader.load();
         Scene sceneRoom = new Scene(room);
         RoomController roomController = loader.getController();
