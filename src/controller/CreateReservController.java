@@ -1,4 +1,5 @@
-package modele;
+
+package controller;
 
 public class CreateReservController {
 

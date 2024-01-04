@@ -1,50 +1,51 @@
-Professionnel ; Quantum Innovations ; 2 ; 18/11/2024 ; 1
-particulier ; Emilie ; Bernard ; 5 ; 14/06/2024 ; 2
-particulier ; Léa ; Laurent ; 10 ; 08/11/2022 ; 2
-Professionnel ; BlueTech Solutions ; 5 ; 15/06/2024 ; 1
-Professionnel ; Visionary Co. ; 3 ; 10/09/2024 ; 1
-Professionnel ; DataCraft ; 7 ; 07/08/2024 ; 2
-particulier ; Hugo ; Martinez ; 4 ; 20/01/2024 ; 1
-Professionnel ; Innovate Co. ; 3 ; 10/09/2024 ; 1
-Professionnel ; Smart Services ; 6 ; 05/04/2024 ; 2
-particulier ; Martin ; Dubois ; 4 ; 20/01/2024 ; 1
-particulier ; Clara ; Garcia ; 8 ; 15/05/2023 ; 2
-Professionnel ; Creative Minds ; 1 ; 25/05/2024 ; 1
-Professionnel ; Future Systems ; 9 ; 12/10/2024 ; 2
-Professionnel ; CodeCrafters ; 1 ; 25/05/2024 ; 1
-Professionnel ; InnovateHub ; 4 ; 30/03/2024 ; 1
-particulier ; Manon ; Thomas ; 6 ; 19/12/2022 ; 2
-particulier ; Louis ; Durand ; 2 ; 07/04/2024 ; 1
-Professionnel ; TechWise ; 4 ; 30/03/2024 ; 1
-Professionnel ; DataExperts ; 4 ; 30/03/2024 ; 1
-Professionnel ; Quantum Services ; 6 ; 05/04/2024 ; 2
-particulier ; Alice ; Mercier ; 6 ; 19/12/2022 ; 2
-particulier ; Elise ; Rousseau ; 5 ; 14/06/2024 ; 2
-Professionnel ; Future Tech ; 2 ; 18/11/2024 ; 1
-particulier ; Léo ; Garcia ; 3 ; 02/11/2022 ; 1
-Professionnel ; DataInsights ; 7 ; 07/08/2024 ; 2
-particulier ; Maxime ; Leroux ; 1 ; 25/03/2023 ; 1
-Professionnel ; ABC Solutions ; 5 ; 15/06/2024 ; 1
-particulier ; Jules ; Lemoine ; 9 ; 30/09/2023 ; 1
-Professionnel ; SmartSolutions ; 5 ; 15/06/2024 ; 1
-Professionnel ; InnovateTech ; 8 ; 22/02/2024 ; 2
-Professionnel ; Global Solutions ; 3 ; 10/09/2024 ; 1
-Professionnel ; DataCraft ; 7 ; 07/08/2024 ; 2
-particulier ; Manon ; Petit ; 7 ; 10/08/2023 ; 2
-particulier ; Pierre ; Rousseau ; 3 ; 02/11/2022 ; 1
-Professionnel ; Quantum Innovations ; 2 ; 18/11/2024 ; 1
-particulier ; Lucas ; Lemoine ; 1 ; 25/03/2023 ; 1
-particulier ; Thomas ; Girard ; 2 ; 07/04/2024 ; 1
-Professionnel ; DataCraft ; 7 ; 07/08/2024 ; 2
-Professionnel ; TechMinds ; 7 ; 07/08/2024 ; 2
-Professionnel ; Quantum Innovations ; 2 ; 18/11/2024 ; 1
-particulier ; Emma ; Mercier ; 10 ; 08/11/2022 ; 2
-Professionnel ; Global Innovations ; 2 ; 18/11/2024 ; 1
-particulier ; Chloé ; Nguyen ; 6 ; 19/12/2022 ; 2
-Professionnel ; IdeaMasters ; 1 ; 25/05/2024 ; 1
-Professionnel ; TechVision ; 10 ; 08/12/2024 ; 2
-particulier ; Léa ; Rousseau ; 5 ; 14/06/2024 ; 2
-Professionnel ; Future Systems ; 9 ; 12/10/2024 ; 2
-particulier ; Lucas ; Moreau ; 1 ; 25/03/2023 ; 1
-Professionnel ; Future Tech ; 2 ; 18/11/2024 ; 1
-particulier ; Emilie ; Bernard ; 5 ; 14/06/2024 ; 2
+Professionnel ; Quantum Innovations ; +33654781236 ; 2 ; 18/11/2024 ; 1
+particulier ; Emilie ; Bernard ; +330741258963 ; 5 ; 14/06/2024 ; 2
+particulier ; Léa ; Laurent ; +33698521476 ; 10 ; 08/11/2022 ; 2
+Professionnel ; BlueTech Solutions ; +33123456789 ; 5 ; 15/06/2024 ; 1
+Professionnel ; Visionary Co. ; +330689754123 ; 3 ; 10/09/2024 ; 1
+Professionnel ; DataCraft ; +33158749632 ; 7 ; 07/08/2024 ; 2
+particulier ; Hugo ; Martinez ; +33654781236 ; 4 ; 20/01/2024 ; 1
+Professionnel ; Innovate Co. ; +330741258963 ; 3 ; 10/09/2024 ; 1
+Professionnel ; Smart Services ; +33698521476 ; 6 ; 05/04/2024 ; 2
+particulier ; Martin ; Dubois ; +33123456789 ; 4 ; 20/01/2024 ; 1
+particulier ; Clara ; Garcia ; +330689754123 ; 8 ; 15/05/2023 ; 2
+Professionnel ; Creative Minds ; +33158749632 ; 1 ; 25/05/2024 ; 1
+Professionnel ; Future Systems ; +33654781236 ; 9 ; 12/10/2024 ; 2
+Professionnel ; CodeCrafters ; +330741258963 ; 1 ; 25/05/2024 ; 1
+Professionnel ; InnovateHub ; +33698521476 ; 4 ; 30/03/2024 ; 1
+particulier ; Manon ; Thomas ; +33123456789 ; 6 ; 19/12/2022 ; 2
+particulier ; Louis ; Durand ; +330689754123 ; 2 ; 07/04/2024 ; 1
+Professionnel ; TechWise ; +33158749632 ; 4 ; 30/03/2024 ; 1
+Professionnel ; DataExperts ; +33654781236 ; 4 ; 30/03/2024 ; 1
+Professionnel ; Quantum Services ; +330741258963 ; 6 ; 05/04/2024 ; 2
+particulier ; Alice ; Mercier ; +33698521476 ; 6 ; 19/12/2022 ; 2
+particulier ; Elise ; Rousseau ; +33123456789 ; 5 ; 14/06/2024 ; 2
+Professionnel ; Future Tech ; +330689754123 ; 2 ; 18/11/2024 ; 1
+particulier ; Léo ; Garcia ; +33158749632 ; 3 ; 02/11/2022 ; 1
+Professionnel ; DataInsights ; +33654781236 ; 7 ; 07/08/2024 ; 2
+particulier ; Maxime ; Leroux ; +330741258963 ; 1 ; 25/03/2023 ; 1
+Professionnel ; ABC Solutions ; +33698521476 ; 5 ; 15/06/2024 ; 1
+particulier ; Jules ; Lemoine ; +33123456789 ; 9 ; 30/09/2023 ; 1
+Professionnel ; SmartSolutions ; +330689754123 ; 5 ; 15/06/2024 ; 1
+Professionnel ; InnovateTech ; +33158749632 ; 8 ; 22/02/2024 ; 2
+Professionnel ; Global Solutions ; +33654781236 ; 3 ; 10/09/2024 ; 1
+Professionnel ; DataCraft ; +330741258963 ; 7 ; 07/08/2024 ; 2
+particulier ; Manon ; Petit ; +33698521476 ; 7 ; 10/08/2023 ; 2
+particulier ; Pierre ; Rousseau ; +33123456789 ; 3 ; 02/11/2022 ; 1
+Professionnel ; Quantum Innovations ; +33654781236 ; 2 ; 18/11/2024 ; 1
+particulier ; Lucas ; Lemoine ; +33158749632 ; 1 ; 25/03/2023 ; 1
+particulier ; Thomas ; Girard ; +330741258963 ; 2 ; 07/04/2024 ; 1
+Professionnel ; DataCraft ; +33158749632 ; 7 ; 07/08/2024 ; 2
+Professionnel ; TechMinds ; +33654781236 ; 7 ; 07/08/2024 ; 2
+Professionnel ; Quantum Innovations ; +330741258963 ; 2 ; 18/11/2024 ; 1
+particulier ; Emma ; Mercier ; +33698521476 ; 10 ; 08/11/2022 ; 2
+Professionnel ; Global Innovations ; +33654781236 ; 2 ; 18/11/2024 ; 1
+particulier ; Chloé ; Nguyen ; +330689754123 ; 6 ; 19/12/2022 ; 2
+Professionnel ; IdeaMasters ; +33158749632 ; 1 ; 25/05/2024 ; 1
+Professionnel ; TechVision ; +330741258963 ; 10 ; 08/12/2024 ; 2
+particulier ; Léa ; Rousseau ; +33698521476 ; 5 ; 14/06/2024 ; 2
+Professionnel ; Future Systems ; +33654781236 ; 9 ; 12/10/2024 ; 2
+particulier ; Lucas ; Moreau ; +33158749632 ; 1 ; 25/03/2023 ; 1
+Professionnel ; Future Tech ; +33654781236 ; 2 ; 18/11/2024 ; 1
+particulier ; Emilie ; Bernard ; +330741258963 ; 5 ; 14/06/2024 ; 2
+
