@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateReservController">
+   <center>
+      <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
+         <children>
+            
+            <AnchorPane fx:id="anchorMenu" layoutX="-7.0" prefHeight="139.0" prefWidth="851.0" style="-fx-background-color: #a1a1a1;">
+            	<fx:include source="navMenu.fxml" />
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
+=======
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
@@ -16,3 +36,4 @@
       </AnchorPane>
    </center>
 </BorderPane>
+>>>>>>> a1dfde22c2281bc7abbf221a0834361e91651abb

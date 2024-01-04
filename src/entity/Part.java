@@ -4,15 +4,15 @@ public class Part {
 	
 	private String nom;
 	private String prenom;
-	private Client idClient;
+	private Client telephone;
 	
 	
 	
 
-	public Part(String nom, String prenom, Client idClient) {
+	public Part(String nom, String prenom, Client telephone) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.idClient = idClient;
+		this.telephone = telephone;
 	}
 
 
@@ -36,13 +36,13 @@ public class Part {
 	}
 
 
-	public Client getIdClient() {
-		return idClient;
+	public Client getTelephone() {
+		return telephone;
 	}
 
 
-	public void setIdClient(Client idClient) {
-		this.idClient = idClient;
+	public void setTelephone(Client telephone) {
+		this.telephone = telephone;
 	}
 	
 	
