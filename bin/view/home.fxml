@@ -8,10 +8,7 @@
    <center>
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
-            
-            <AnchorPane fx:id="anchorMenu" layoutX="-7.0" prefHeight="139.0" prefWidth="851.0" style="-fx-background-color: #a1a1a1;">
-            	<fx:include source="navMenu.fxml" />
-            </AnchorPane>
+           	<fx:include source="navMenu.fxml" />
          </children>
       </AnchorPane>
    </center>

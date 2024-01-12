@@ -1,0 +1,12 @@
+.navMenu{
+	-fx-background-image: url('../assets/img/wood_background.jpg');
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+}

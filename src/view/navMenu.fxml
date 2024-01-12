@@ -1,23 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NavMenuController">
-   <center>
-      <AnchorPane layoutX="756.0" prefHeight="0.0" prefWidth="756.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
+<BorderPane stylesheets="application/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NavMenuController">
+   <left>
+      <AnchorPane fx:id="anchorMenu" prefHeight="139.0" prefWidth="1000.0" styleClass="navMenu" BorderPane.alignment="CENTER">
          <children>
-            
-            <AnchorPane fx:id="anchorMenu" prefHeight="139.0" prefWidth="1000.0" style="-fx-background-color: #a1a1a1;">
+            <StackPane layoutX="56.0" layoutY="12.0" onMouseClicked="#goToHome">
                <children>
-                  <Button fx:id="buttonHome" layoutX="77.0" layoutY="57.0" mnemonicParsing="false" onAction="#goToHome" onMouseClicked="#goToHome" text="Accueil" />
-                  <Button fx:id="buttonLstReserv" layoutX="302.0" layoutY="57.0" mnemonicParsing="false" onAction="#goTolstReserv" text="Liste des réservations" />
-                  <Button fx:id="buttonCreateReserv" layoutX="643.0" layoutY="57.0" mnemonicParsing="false" onAction="#goToCreateReserv" text="Créer une réservation" />
-                  <Button fx:id="buttonRoom" layoutX="932.0" layoutY="57.0" mnemonicParsing="false" onAction="#goToRoom" text="Salle" />
+                  <ImageView fx:id="buttonHome" fitHeight="115.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/post_it.png" />
+                     </image>
+                  </ImageView>
+                  <Label rotate="-12.1" text="Accueil" textAlignment="CENTER">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="22.0" />
+                     </font>
+                  </Label>
                </children>
-            </AnchorPane>
+            </StackPane>
+
+            <StackPane layoutX="295.0" layoutY="12.0" onMouseClicked="#goTolstReserv">
+               <children>
+                  <ImageView fx:id="buttonLstReserv" fitHeight="115.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/post_it.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="56.0" prefWidth="104.0" rotate="-12.1" text="Liste des réservations" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+
+            <StackPane layoutX="536.0" layoutY="12.0" onMouseClicked="#goToCreateReserv">
+               <children>
+                  <ImageView fx:id="buttonCreateReserv" fitHeight="115.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/post_it.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="76.0" prefWidth="105.0" rotate="-12.0" text="Créer une réservation" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+
+            <StackPane layoutX="783.0" layoutY="12.0" onMouseClicked="#goToRoom">
+               <children>
+                  <ImageView fx:id="buttonRoom" fitHeight="115.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/post_it.png" />
+                     </image>
+                  </ImageView>
+                  <Label rotate="-12.0" text="Salle">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
-   </center>
+   </left>
 </BorderPane>
