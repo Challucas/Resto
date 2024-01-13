@@ -12,17 +12,7 @@
    <center>
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
-           	<fx:include source="navMenu.fxml" />
-            <ImageView fx:id="wallpaper" fitHeight="654.0" fitWidth="1000.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/empty-blackboard.jpg" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="196.0" layoutY="494.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " wrappingWidth="599.6197509765625">
-               <font>
-                  <Font name="Bernard MT Condensed" size="31.0" />
-               </font>
-            </Text>
+           	<fx:include source="background.fxml" />
             <Label layoutX="115.0" layoutY="192.0" text="Prise de réservation" textFill="WHITE">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />

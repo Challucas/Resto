@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import service.listReservModele;
+import service.LstReservModele;
 
 public class LstReservController implements Initializable{
 
@@ -24,12 +24,12 @@ public class LstReservController implements Initializable{
     @FXML
     private ImageView wallpaper;
     
-    listReservModele modele;
+    LstReservModele modele;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			modele = new listReservModele();
+			modele = new LstReservModele();
 			initListPost();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
