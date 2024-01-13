@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateReservFormController">
+   <center>
+      <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
+         <children>
+           	<fx:include source="background.fxml" />
+            <Label layoutX="115.0" layoutY="192.0" text="Prise de réservation" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="274.0" text="Nom:" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="360.0" text="Prénom:" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="446.0" text="Téléphone:" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="532.0" text="Nombre :" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="selectDate" layoutX="38.0" layoutY="618.0" />
+            <TextField fx:id="inputNom" layoutX="116.0" layoutY="265.0" prefHeight="31.0" prefWidth="321.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-width: 0 0 5 0; -fx-border-style: dotted; -fx-text-fill: white;">
+               <font>
+                  <Font name="Bernard MT Condensed" size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="inputPrenom" layoutX="163.0" layoutY="351.0" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-width: 0 0 5 0; -fx-border-style: dotted; -fx-text-fill: white;">
+               <font>
+                  <Font name="Bernard MT Condensed" size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="inputTel" layoutX="193.0" layoutY="446.0" prefHeight="63.0" prefWidth="258.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-width: 0 0 5 0; -fx-border-style: dotted; -fx-text-fill: white;">
+               <font>
+                  <Font name="Bernard MT Condensed" size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="inputNbr" layoutX="163.0" layoutY="532.0" prefHeight="63.0" prefWidth="134.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-width: 0 0 5 0; -fx-border-style: dotted; -fx-text-fill: white;">
+               <font>
+                  <Font name="Bernard MT Condensed" size="30.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
