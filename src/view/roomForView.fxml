@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RoomController">
    <center>
@@ -77,17 +75,7 @@
             <RadioButton fx:id="tableFourPlace2" layoutX="413.0" layoutY="391.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="119.0" toggleGroup="$radioGroup" />
             <RadioButton fx:id="tableSixPlace1" layoutX="751.0" layoutY="261.0" mnemonicParsing="false" prefHeight="206.0" prefWidth="119.0" toggleGroup="$radioGroup" />
             <RadioButton fx:id="tableEightPlace1" layoutX="543.0" layoutY="602.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="302.0" toggleGroup="$radioGroup" />
-            <DatePicker fx:id="selectedDate" editable="false" layoutX="92.0" layoutY="181.0" promptText="Sélectionner une date" />
-            <Label layoutX="85.0" layoutY="687.0" text="Valider" textFill="WHITE">
-               <font>
-                  <Font name="Bernard MT Condensed" size="36.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnValidation" fitHeight="80.0" fitWidth="145.0" layoutX="64.0" layoutY="670.0" onMouseClicked="#validReservation" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
+            <DatePicker fx:id="selectedDate" layoutX="92.0" layoutY="181.0" promptText="Sélectionner une date" />
          </children>
       </AnchorPane>
    </center>

@@ -2,31 +2,22 @@ package entity;
 
 public class Client {
 
-	private String telephone;
 	private Integer idClient;
-	
-	public Client(String telephone, Integer idClient) {
-		this.telephone = telephone;
-		this.idClient = idClient;
-	}
+    private String telephone;
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public String getTelephone() {
+        return telephone;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
-	public Integer getIdClient() {
-		return idClient;
-	}
+    public Integer getIdClient() {
+        return idClient;
+    }
 
-	public void setIdClient(Integer idClient) {
-		this.idClient = idClient;
-	}
-	
-	
-	
-	
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
+    }
 }
