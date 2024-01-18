@@ -70,13 +70,13 @@
                   <Image url="@../assets/img/rectangle.png" />
                </image>
             </ImageView>
-            <RadioButton fx:id="tableFourPlace1" layoutX="141.0" layoutY="388.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="119.0" visible="false">
+            <RadioButton fx:id="tableFourPlace1" layoutX="141.0" layoutY="388.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="119.0">
                <toggleGroup>
                   <ToggleGroup fx:id="radioGroup" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="tableFourPlace2" layoutX="413.0" layoutY="391.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="119.0" toggleGroup="$radioGroup" visible="false" />
-            <RadioButton fx:id="tableSixPlace1" layoutX="751.0" layoutY="261.0" mnemonicParsing="false" prefHeight="206.0" prefWidth="119.0" toggleGroup="$radioGroup" visible="false" />
-            <RadioButton fx:id="tableEightPlace1" layoutX="543.0" layoutY="602.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="302.0" toggleGroup="$radioGroup" visible="false" />
+            <RadioButton fx:id="tableFourPlace2" layoutX="413.0" layoutY="391.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="119.0" toggleGroup="$radioGroup" />
+            <RadioButton fx:id="tableSixPlace1" layoutX="751.0" layoutY="261.0" mnemonicParsing="false" prefHeight="206.0" prefWidth="119.0" toggleGroup="$radioGroup" />
+            <RadioButton fx:id="tableEightPlace1" layoutX="543.0" layoutY="602.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="302.0" toggleGroup="$radioGroup" />
             <DatePicker fx:id="selectedDate" editable="false" layoutX="92.0" layoutY="181.0" promptText="Sélectionner une date" />
             <Label layoutX="85.0" layoutY="687.0" text="Valider" textFill="WHITE">
                <font>
