@@ -1,15 +1,21 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import service.ClientModel;
 import service.ConnectModel;
 import entity.Part;
@@ -42,6 +48,9 @@ public class CreateReservFormController implements Initializable{
     private ImageView btnValidate;
     
     private String selectedClient;
+    private Integer nbrPeople;
+    private LocalDate dateSelected;
+    private int idTypeClient;
     
     ConnectModel modele;
     ClientModel clientModel;
@@ -50,6 +59,7 @@ public class CreateReservFormController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			modele = new ConnectModel();
+			this.clientModel = new ClientModel(modele.getConnect());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,35 +71,63 @@ public class CreateReservFormController implements Initializable{
     }
 
     @FXML
-    void validateForm(MouseEvent event) {
+    void validateForm(MouseEvent event) throws IOException {
         if ("particulier".equals(selectedClient)) {
         	forParticulier();
         } else if ("professionnel".equals(selectedClient)) {
-        	forProfessionnel();       
+        	forProfessionnel();    
         }
+        this.dateSelected = selectDate.getValue();
+        this.nbrPeople = Integer.parseInt(inputNbr.getText());
+        goToRoom(event);
     }
 
-	private void forProfessionnel() {
-		this.clientModel = new ClientModel(modele.getConnect());
+	private void forProfessionnel() {	
 		String nomSociete = inputSociete.getText();
+		String telephone = inputTel.getText();
+		
 		Pro pro = new Pro();
 		pro.setNomSociete(nomSociete);
+		
 		int idPro = this.clientModel.insertProfessionnel(pro);
-		int idTypeClient = this.clientModel.insertTypeClient(idPro, false);
-		String telephone = inputTel.getText();
+		
+		this.idTypeClient = this.clientModel.insertTypeClient(idPro, false);
+		
 		this.clientModel.insertClient(telephone, idTypeClient);
     }
 
-	private void forParticulier() {
-		this.clientModel = new ClientModel(modele.getConnect());
+	private void forParticulier() {		
 		String nomParticulier = inputNom.getText();
 		String prenomParticulier = inputPrenom.getText();
+		String telephone = inputTel.getText();
+		
 		Part part = new Part();
 		part.setNom(nomParticulier);
 		part.setPrenom(prenomParticulier);
+		
 		int idPart = this.clientModel.insertParticulier(part);
-		int idTypeClient = this.clientModel.insertTypeClient(idPart, true);
-		String telephone = inputTel.getText();
+		
+		this.idTypeClient = this.clientModel.insertTypeClient(idPart, true);
+		
 		this.clientModel.insertClient(telephone, idTypeClient);
 	}
+	
+    @FXML
+    void goToRoom(MouseEvent event) throws IOException {
+        try {
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/room.fxml"));
+	        Parent room = loader.load();
+	        Scene sceneRoom = new Scene(room);
+	        RoomController roomController = loader.getController();
+	        roomController.setSelectedDate(this.dateSelected);
+	        roomController.currentClient(this.idTypeClient);
+	        roomController.setNbrPeople(this.nbrPeople);
+
+	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        stage.setScene(sceneRoom);
+	        stage.show();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+    }
 }

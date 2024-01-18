@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import entity.Client;
 import entity.Part;
 import entity.Pro;
+import entity.Table;
 
 
 public class ClientModel {
@@ -85,6 +87,26 @@ public class ClientModel {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Client getClientByIdTypeClient(int idTypeClient) {
+		Client client = new Client();
+		
+		try {
+			String queryClient = "SELECT id_client FROM client WHERE id_type_client = ?";
+			PreparedStatement pstClient = this.conn.prepareStatement(queryClient);
+			pstClient.setInt(1, idTypeClient);
+			ResultSet rs = pstClient.executeQuery();
+			if(rs.next()) {
+				client.setIdClient(rs.getInt("id_client"));
+			}
+			rs.close();
+			pstClient.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return client;
 	}
 
 }

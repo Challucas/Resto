@@ -2,13 +2,8 @@ package entity;
 
 public class Client {
 
+	private Integer idClient;
     private String telephone;
-    private Integer idClient;
-    
-    public Client(String telephone, Integer idClient) {
-        this.telephone = telephone;
-        this.idClient = idClient;
-    }
 
     public String getTelephone() {
         return telephone;

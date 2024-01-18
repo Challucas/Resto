@@ -57,7 +57,7 @@ public class NavMenuController {
 
     @FXML
     void goToRoom(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/room.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/roomForView.fxml"));
         Parent room = loader.load();
         Scene sceneRoom = new Scene(room);
         RoomController roomController = loader.getController();

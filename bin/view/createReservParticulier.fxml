@@ -39,7 +39,7 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <DatePicker fx:id="selectDate" layoutX="38.0" layoutY="618.0" />
+            <DatePicker fx:id="selectDate" layoutX="38.0" layoutY="618.0" promptText="Sélectionner une date" />
             <TextField fx:id="inputNom" layoutX="116.0" layoutY="265.0" prefHeight="31.0" prefWidth="321.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-width: 0 0 5 0; -fx-border-style: dotted; -fx-text-fill: white;">
                <font>
                   <Font name="Bernard MT Condensed" size="30.0" />
