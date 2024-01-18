@@ -33,6 +33,8 @@ public class CreateReservController {
         BorderPane root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        CreateReservFormController createReservFormParticulier = loader.getController();          
+        createReservFormParticulier.setSelectedClient("particulier");
         
         stage.setScene(scene);
         stage.show();
@@ -44,6 +46,8 @@ public class CreateReservController {
         BorderPane root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        CreateReservFormController createReservFormPro = loader.getController();          
+        createReservFormPro.setSelectedClient("professionnel");
         
         stage.setScene(scene);
         stage.show();

@@ -51,6 +51,16 @@
                   <Font name="Bernard MT Condensed" size="30.0" />
                </font>
             </TextField>
+            <Label layoutX="353.0" layoutY="689.0" text="Valider" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnValidate" fitHeight="80.0" fitWidth="145.0" layoutX="332.0" layoutY="671.0" onMouseClicked="#validateForm" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/img/rectangle.png" />
+               </image>
+            </ImageView>            
          </children>
       </AnchorPane>
    </center>
