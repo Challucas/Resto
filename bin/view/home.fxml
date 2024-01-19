@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+<BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
    <center>
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
            	<fx:include source="background.fxml" />
+            <ImageView fitHeight="438.0" fitWidth="375.0" layoutX="549.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/img/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>

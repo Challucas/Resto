@@ -70,6 +70,11 @@
                   <Image url="@../assets/img/rectangle.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="438.0" fitWidth="375.0" layoutX="549.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/img/logo.png" />
+               </image>
+            </ImageView>            
          </children>
       </AnchorPane>
    </center>
