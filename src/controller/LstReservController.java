@@ -3,13 +3,21 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+import entity.Part;
+import entity.Pro;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -17,9 +25,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import service.ClientModel;
 import service.ConnectModel;
 import service.LstReservModele;
 import service.ReservationModel;
+import service.TableModel;
 
 public class LstReservController implements Initializable{
 
@@ -36,16 +47,19 @@ public class LstReservController implements Initializable{
     private ImageView wallpaper;
     
     LstReservModele listModel;
+    ConnectModel model;
+    ClientModel clientModel;
     ReservationModel reservationModel;
-    ConnectModel modele;
-
+    TableModel tableModel;
+    
+    private Integer nbrPeople;
+    private LocalDate dateSelected;
+    private int idTypeClient;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			modele = new ConnectModel();
-			this.listModel = new LstReservModele(modele.getConnect());
-			this.reservationModel = new ReservationModel(modele.getConnect());
+			initializeModels();
 			initListPost();
 			initListReservValidate();
 		} catch (Exception e) {
@@ -53,6 +67,20 @@ public class LstReservController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+    
+    private void initializeModels() {
+		try {
+			model = new ConnectModel();			
+			clientModel = new ClientModel(model.getConnect());			
+			reservationModel = new ReservationModel(model.getConnect());
+			tableModel = new TableModel(model.getConnect());
+			this.listModel = new LstReservModele(model.getConnect());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
     public void initListPost() throws SQLException {
     	ArrayList<String> lstClient;
@@ -123,6 +151,7 @@ public class LstReservController implements Initializable{
 			@Override
             public void accept(ButtonType buttonType) {
                 if (buttonType == validateButton) {
+                	LstReservController.this.validateReservWeb(selectedItem);
                 } else if (buttonType == delateButton) {
                 	if( typeReserv == "ReservBDD") {
                 		LstReservController.this.reservationModel.deleteReservationBDD();                		
@@ -137,5 +166,88 @@ public class LstReservController implements Initializable{
             }
         });
     }
+    
+    private void validateReservWeb(String selectedItem) {
+	    String[] champs = selectedItem.split("\\s*\\|\\s*");
+	    if(champs.length == 5 ) {
+	    	forProfessionnel(champs[0], champs[1]);
+	    	
+	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        LocalDate dateReserv = LocalDate.parse(champs[3], formatter);
+	    	this.dateSelected = dateReserv;
+	    	
+	        int nbrPer = Integer.parseInt(champs[4].trim());
+	    	this.nbrPeople = nbrPer;
+	    }
+	    else if(champs.length == 6) {
+	    	forParticulier(champs[0], champs[1], champs[2]);
+	    	
+	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        LocalDate dateReserv = LocalDate.parse(champs[4], formatter);
+	    	this.dateSelected = dateReserv;
+	    	
+	    	int nbrPer = Integer.parseInt(champs[5].trim());
+	    	this.nbrPeople = nbrPer;
+	    }
+	    
+	    try {
+			goToRoom();
+    		this.reservationModel.deleteReservationWeb(selectedItem);                		                		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
+    private void forProfessionnel(String nomSocieteWeb, String telephoneWeb) {	
+		String nomSociete = nomSocieteWeb;
+		String telephone = telephoneWeb;
+		
+		Pro pro = new Pro();
+		pro.setNomSociete(nomSociete);
+		
+		int idPro = this.clientModel.insertProfessionnel(pro);
+		
+		this.idTypeClient = this.clientModel.insertTypeClient(idPro, false);
+		
+		this.clientModel.insertClient(telephone, idTypeClient);
+    }
+
+	private void forParticulier(String nom, String prenom, String telephonePart) {		
+		String nomParticulier = nom;
+		String prenomParticulier = prenom;
+		String telephone = telephonePart;
+		
+		Part part = new Part();
+		part.setNom(nomParticulier);
+		part.setPrenom(prenomParticulier);
+		
+		int idPart = this.clientModel.insertParticulier(part);
+		
+		this.idTypeClient = this.clientModel.insertTypeClient(idPart, true);
+		
+		this.clientModel.insertClient(telephone, idTypeClient);
+	}
+	
+	@FXML
+	void goToRoom() throws IOException {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/room.fxml"));
+	        Parent room = loader.load();
+	        Scene sceneRoom = new Scene(room);
+	        RoomController roomController = loader.getController();
+	        roomController.setSelectedDate(this.dateSelected);
+	        roomController.currentClient(this.idTypeClient);
+	        roomController.setNbrPeople(this.nbrPeople);
+
+	        Stage stage = (Stage) listViewReservWeb.getScene().getWindow();
+	        stage.setScene(sceneRoom);
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 
 }
