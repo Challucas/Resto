@@ -2,7 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -18,8 +21,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import service.ClientModel;
 import service.ConnectModel;
+import service.ReservationModel;
+import service.TableModel;
+import service.util.DatePickerUtil;
 import entity.Part;
 import entity.Pro;
+import entity.Reservation;
 
 public class CreateReservFormController implements Initializable{
 
@@ -52,29 +59,48 @@ public class CreateReservFormController implements Initializable{
     private LocalDate dateSelected;
     private int idTypeClient;
     
-    ConnectModel modele;
+    private static final String clientTypeProfessional = "professionnel";
+    private static final String clientTypeParticular = "particulier";
+    
+    ConnectModel connectModel;
     ClientModel clientModel;
+    ReservationModel reservationModel;
+    TableModel tableModel;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	initializeModels();
+    	configureDatePicker();
+	}  
+    
+    private void initializeModels() {
 		try {
-			modele = new ConnectModel();
-			this.clientModel = new ClientModel(modele.getConnect());
+			connectModel = new ConnectModel();			
+			clientModel = new ClientModel(connectModel.getConnect());			
+			reservationModel = new ReservationModel(connectModel.getConnect());
+			tableModel = new TableModel(connectModel.getConnect());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}   
+    }
+    
+    private void configureDatePicker() {
+    	ArrayList<LocalDate> disabledDates = reservationModel.existingReservationDate();
+		ArrayList<Reservation> reservations = reservationModel.checkingNoCompletedDate(disabledDates);
+		int totalTable = tableModel.countTable();
+		DatePickerUtil.disableDatesAndPrevious(selectDate, disabledDates, reservations, totalTable);
+    }
     
     public void setSelectedClient(String clientType) {
-    	selectedClient = clientType;
+    	this.selectedClient = clientType;
     }
 
     @FXML
     void validateForm(MouseEvent event) throws IOException {
-        if ("particulier".equals(selectedClient)) {
+        if (clientTypeParticular.equals(selectedClient)) {
         	forParticulier();
-        } else if ("professionnel".equals(selectedClient)) {
+        } else if (clientTypeProfessional.equals(selectedClient)) {
         	forProfessionnel();    
         }
         this.dateSelected = selectDate.getValue();

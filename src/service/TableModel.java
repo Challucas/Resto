@@ -35,4 +35,23 @@ public class TableModel {
 		
 		return table;
 	}
+	
+	public int countTable() {
+		int nbTable = 0;
+		
+		try {
+			String queryTable = "SELECT count(*) FROM tables";
+			PreparedStatement pstTable = this.conn.prepareStatement(queryTable);		
+			ResultSet rs = pstTable.executeQuery();
+			if(rs.next()) {
+				nbTable = rs.getInt(1);
+			}
+			rs.close();
+			pstTable.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return nbTable;
+	}
 }
