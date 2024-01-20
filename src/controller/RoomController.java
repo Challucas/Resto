@@ -1,42 +1,45 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import entity.Client;
 import entity.Reservation;
 import entity.Table;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import service.ClientModel;
 import service.ConnectModel;
 import service.ReservationModel;
 import service.TableModel;
+import service.util.DatePickerUtil;
 
 public class RoomController implements Initializable{
 
     @FXML
-    private RadioButton tableFourPlace1;
+    private CheckBox tableFourPlace1;
 
     @FXML
-    private RadioButton tableFourPlace2;
+    private CheckBox tableFourPlace2;
 
     @FXML
-    private RadioButton tableSixPlace1;
+    private CheckBox tableEightPlace;
 
     @FXML
-    private RadioButton tableEightPlace1;
-    
-    @FXML
-    private ToggleGroup radioGroup;
+    private CheckBox tableSixPlace;
     
     @FXML
     private DatePicker selectedDate;
@@ -46,20 +49,50 @@ public class RoomController implements Initializable{
     
     
     private LocalDate dateSelected;
-    private int currentClientId;
     private int nbrPeople;
     
-    ConnectModel modele;
+    ConnectModel connectModel;
     TableModel tableModel;
     ClientModel clientModel;
     ReservationModel reservationModel;
     
     Client currentClient = new Client();
     
+    private static final int idTableFourPlace1 = 1;
+    private static final int idTableFourPlace2 = 2;
+    private static final int idTableSixPlace = 3;
+    private static final int idTableEightPlace = 4;
+
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+    	initializeModels();
+	}   
+    
+    private void initializeModels() {
+		try {
+			connectModel = new ConnectModel();			
+			clientModel = new ClientModel(connectModel.getConnect());			
+			reservationModel = new ReservationModel(connectModel.getConnect());
+			tableModel = new TableModel(connectModel.getConnect());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
     public void setSelectedDate(LocalDate date) {
     	this.dateSelected = date;
     	selectedDate.setValue(this.dateSelected);
+    	configureDatePicker();
+    }
+    
+    private void configureDatePicker() {
+    	ArrayList<LocalDate> disabledDates = reservationModel.existingReservationDate();
+    	ArrayList<Reservation> reservations = reservationModel.checkingNoCompletedDate(disabledDates);
+    	int totalTable = tableModel.countTable();
+    	
+    	DatePickerUtil.disableDatesAndPrevious(selectedDate, disabledDates, reservations, totalTable);
+    	disabledReservedTables(reservations);
     }
     
     public void currentClient(int client) {  	
@@ -70,47 +103,93 @@ public class RoomController implements Initializable{
     	this.nbrPeople = nbr;
     }
     
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			modele = new ConnectModel();
-			this.tableModel = new TableModel(modele.getConnect());
-			this.clientModel = new ClientModel(modele.getConnect());
-			this.reservationModel = new ReservationModel(modele.getConnect());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}   
-    
     @FXML
-    void validReservation(MouseEvent event) {
-    	int choosedTable = tableSelected();
+    void validReservation(MouseEvent event) throws IOException {
+    	ArrayList<Integer> choosedTable = tableSelected();  
+    	for(Integer idTable : choosedTable) {		
+    		Table table = this.tableModel.getIdTable(idTable);
+    		Reservation reservation = createReservation(table);
+    		this.reservationModel.insertReservation(reservation);
+    	}
     	
-    	Table table = this.tableModel.getIdTable(choosedTable);
-    	
+    	goToHome(event);
+    }
+    
+    private Reservation createReservation(Table table) {
     	Reservation reservation = new Reservation();
     	reservation.setIdTable(table);
     	reservation.setIdClient(currentClient);
-    	Date sqlDate = Date.valueOf(this.dateSelected);
-    	reservation.setDate(sqlDate);
+    	reservation.setDate(Date.valueOf(this.dateSelected));
     	reservation.setNbrPersonne(this.nbrPeople);
-    	this.reservationModel.insertReservation(reservation);
     	
+    	return reservation;
     }
     
-    public int tableSelected() {
-    	int selectedTable = 0;
+    public ArrayList<Integer> tableSelected() {
+    	ArrayList<Integer> selectedTables = new ArrayList<>();
     	if(tableFourPlace1.isSelected()) {
-    		selectedTable = 1;
-    	} else if (tableFourPlace2.isSelected()) {
-    		selectedTable = 2;
-    	} else if (tableSixPlace1.isSelected()) {
-    		selectedTable = 3;
-    	} else if (tableEightPlace1.isSelected()) {
-    		selectedTable = 4;
+    		selectedTables.add(idTableFourPlace1);
+    	} 
+    	if (tableFourPlace2.isSelected()) {
+    		selectedTables.add(idTableFourPlace2);
+    	} 
+    	if (tableSixPlace.isSelected()) {
+    		selectedTables.add(idTableSixPlace);
+    	} 
+    	if (tableEightPlace.isSelected()) {
+    		selectedTables.add(idTableEightPlace);
     	}
-    	return selectedTable;
+    	return selectedTables;
+    }
+    
+    
+    public void disabledReservedTables(ArrayList<Reservation> reservations) {
+    	for(Reservation reservation : reservations) {
+    		disabledReservedTablesSwitch(reservation);
+    	}
+    }
+    
+    private void disabledReservedTablesSwitch(Reservation reservation) {
+    	int idTable = reservation.getIdTable().getIdTable();
+		LocalDate reservationDate = reservation.getDate().toLocalDate();
+		
+		if(reservationDate.equals(selectedDate.getValue())) {
+			switch(idTable) {
+				case idTableFourPlace1:
+					disableCheckBox(tableFourPlace1);
+					break;
+				case idTableFourPlace2:
+					disableCheckBox(tableFourPlace2);
+					break;
+				case idTableSixPlace:
+					disableCheckBox(tableSixPlace);
+					break;
+				case idTableEightPlace:
+					disableCheckBox(tableEightPlace);
+					break;				
+			}
+		}
+    }
+    
+    private void disableCheckBox(CheckBox checkBox) {
+    	checkBox.setSelected(true);
+    	checkBox.setDisable(true);
+    }
+    
+    @FXML
+    void goToHome(MouseEvent event) throws IOException {
+        try {
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
+	        Parent room = loader.load();
+	        Scene sceneRoom = new Scene(room);
+	        HomeController homeController = loader.getController();
+
+	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        stage.setScene(sceneRoom);
+	        stage.show();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
     }
 
 
