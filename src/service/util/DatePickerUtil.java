@@ -10,7 +10,8 @@ import javafx.util.Callback;
 
 public class DatePickerUtil {
 
-    public static void disableDatesAndPrevious(DatePicker datePicker, final ArrayList<LocalDate> disabledDates, final ArrayList<Reservation> reservations, int nbTables) {
+    public static void disableDatesAndPrevious(DatePicker datePicker, final ArrayList<LocalDate> disabledDates, 
+    		final ArrayList<Reservation> reservations, int nbTables, boolean enabledDates) {
     	datePicker.setDayCellFactory(new Callback<DatePicker, DateCell>(){
 			@Override
 			public DateCell call(final DatePicker selectDate) {
@@ -20,7 +21,9 @@ public class DatePickerUtil {
 						super.updateItem(item, empty);
 						
 						if(item.isBefore(LocalDate.now())) {
-							setDisable(true);
+							if(enabledDates) {
+								setDisable(true);				
+							}
 						}
 						
 						long count = reservations.stream()
@@ -28,8 +31,11 @@ public class DatePickerUtil {
 	                            .map(reservation -> reservation.getIdTable().getIdTable())
 	                            .distinct()
 	                            .count();
+						
 						if(count >= nbTables) {
-							setDisable(true);
+							if(enabledDates) {
+								setDisable(true);				
+							}
 							setStyle("-fx-background-color: #F08080;");
 						} else if(count > 0) {
 							setStyle("-fx-background-color: #FFA500;");
