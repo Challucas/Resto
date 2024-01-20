@@ -2,20 +2,23 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LstReservController">
+<BorderPane prefHeight="793.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LstReservController">
    <center>
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
            	<fx:include source="background.fxml" />
-            <ListView fx:id="listViewReservWeb" layoutX="36.0" layoutY="238.0" prefHeight="486.0" prefWidth="447.0" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <ListView fx:id="listViewReservWeb" layoutX="33.0" layoutY="245.0" prefHeight="486.0" prefWidth="447.0" style="-fx-background-color: transparent; -fx-text-fill: white;" />
             <Label layoutX="105.0" layoutY="192.0" text="Réservation à  valider" textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewReservBDD" layoutX="522.0" layoutY="245.0" prefHeight="486.0" prefWidth="447.0" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <Label layoutX="588.0" layoutY="199.0" text="Réservations acceptées" textFill="WHITE">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
