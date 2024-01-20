@@ -14,62 +14,31 @@
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
            	<fx:include source="backgroundRoom.fxml" />
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="135.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+             <DatePicker fx:id="selectedDate" editable="false" layoutX="92.0" layoutY="181.0" promptText="Sélectionner une date" />
+            <CheckBox fx:id="tableFourPlace1" layoutX="122.0" layoutY="500.0" mnemonicParsing="false" opacity="0.0" prefHeight="134.0" prefWidth="214.0" />
+            <CheckBox fx:id="tableFourPlace2" layoutX="435.0" layoutY="359.0" mnemonicParsing="false" opacity="0.0" prefHeight="218.0" prefWidth="132.0" />
+            <CheckBox fx:id="tableSixPlace" layoutX="665.0" layoutY="501.0" mnemonicParsing="false" opacity="0.0" prefHeight="203.0" prefWidth="217.0" />
+            <CheckBox fx:id="tableEightPlace" layoutX="616.0" layoutY="193.0" mnemonicParsing="false" opacity="0.0" prefHeight="214.0" prefWidth="315.0" />
+            <ImageView fx:id="selectedTable1" fitHeight="363.0" fitWidth="150.0" layoutX="154.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" visible="false">
                <image>
-                  <Image url="@../assets/img/rectangle.png" />
+                  <Image url="@../assets/img/rachure.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="135.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="selectedTable2" fitHeight="363.0" fitWidth="150.0" layoutX="425.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../assets/img/rectangle.png" />
+                  <Image url="@../assets/img/rachure.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="407.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="selectedTable3" fitHeight="245.0" fitWidth="198.0" layoutX="687.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../assets/img/rectangle.png" />
+                  <Image url="@../assets/img/rachure.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="407.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="selectedTable4" fitHeight="245.0" fitWidth="198.0" layoutX="687.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" visible="false">
                <image>
-                  <Image url="@../assets/img/rectangle.png" />
+                  <Image url="@../assets/img/rachure.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="745.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="745.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="745.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="510.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="587.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="665.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="131.0" layoutX="747.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../assets/img/rectangle.png" />
-               </image>
-            </ImageView>
-            <DatePicker fx:id="selectedDate" editable="false" layoutX="92.0" layoutY="181.0" promptText="Sélectionner une date" />
             <Label layoutX="85.0" layoutY="687.0" text="Valider" textFill="WHITE">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
@@ -80,10 +49,6 @@
                   <Image url="@../assets/img/rectangle.png" />
                </image>
             </ImageView>
-            <CheckBox fx:id="tableFourPlace1" layoutX="139.0" layoutY="388.0" mnemonicParsing="false" prefHeight="134.0" prefWidth="121.0" />
-            <CheckBox fx:id="tableFourPlace2" layoutX="412.0" layoutY="388.0" mnemonicParsing="false" prefHeight="134.0" prefWidth="121.0" />
-            <CheckBox fx:id="tableEightPlace" layoutX="544.0" layoutY="602.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="301.0" />
-            <CheckBox fx:id="tableSixPlace" layoutX="752.0" layoutY="258.0" mnemonicParsing="false" prefHeight="212.0" prefWidth="115.0" />
          </children>
       </AnchorPane>
    </center>

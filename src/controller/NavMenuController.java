@@ -60,7 +60,7 @@ public class NavMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/roomForView.fxml"));
         Parent room = loader.load();
         Scene sceneRoom = new Scene(room);
-        RoomController roomController = loader.getController();
+        RoomControllerView roomControllerView = loader.getController();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(sceneRoom);

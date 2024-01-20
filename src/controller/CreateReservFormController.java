@@ -2,10 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -89,7 +87,7 @@ public class CreateReservFormController implements Initializable{
     	ArrayList<LocalDate> disabledDates = reservationModel.existingReservationDate();
 		ArrayList<Reservation> reservations = reservationModel.checkingNoCompletedDate(disabledDates);
 		int totalTable = tableModel.countTable();
-		DatePickerUtil.disableDatesAndPrevious(selectDate, disabledDates, reservations, totalTable);
+		DatePickerUtil.disableDatesAndPrevious(selectDate, disabledDates, reservations, totalTable, true);
     }
     
     public void setSelectedClient(String clientType) {
