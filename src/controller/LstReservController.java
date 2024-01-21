@@ -56,6 +56,8 @@ public class LstReservController implements Initializable{
     private LocalDate dateSelected;
     private int idTypeClient;
     
+    //TODO Initialize models and lists
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
@@ -63,11 +65,9 @@ public class LstReservController implements Initializable{
 			initListPost();
 			initListReservValidate();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-    
     private void initializeModels() {
 		try {
 			model = new ConnectModel();			
@@ -77,7 +77,6 @@ public class LstReservController implements Initializable{
 			this.listModel = new LstReservModele(model.getConnect());
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -129,6 +128,7 @@ public class LstReservController implements Initializable{
 		});
     }
     
+    //TODO action popup
     private void displayPopup(final String selectedItem, final String typeReserv) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Détails de la réservation");
@@ -154,7 +154,7 @@ public class LstReservController implements Initializable{
                 	LstReservController.this.validateReservWeb(selectedItem);
                 } else if (buttonType == delateButton) {
                 	if( typeReserv == "ReservBDD") {
-                		LstReservController.this.reservationModel.deleteReservationBDD();                		
+                		LstReservController.this.reservationModel.deleteReservationBDD(selectedItem);                		
                 	}
                 	else {
                 		LstReservController.this.reservationModel.deleteReservationWeb(selectedItem);                		                		
@@ -167,10 +167,11 @@ public class LstReservController implements Initializable{
         });
     }
     
+    //TODO ADD Reservation in BDD
     private void validateReservWeb(String selectedItem) {
 	    String[] champs = selectedItem.split("\\s*\\|\\s*");
 	    if(champs.length == 5 ) {
-	    	forProfessionnel(champs[0], champs[1]);
+	    	insertForProfessionnel(champs[0], champs[1]);
 	    	
 	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        LocalDate dateReserv = LocalDate.parse(champs[3], formatter);
@@ -180,7 +181,7 @@ public class LstReservController implements Initializable{
 	    	this.nbrPeople = nbrPer;
 	    }
 	    else if(champs.length == 6) {
-	    	forParticulier(champs[0], champs[1], champs[2]);
+	    	insertForParticulier(champs[0], champs[1], champs[2]);
 	    	
 	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        LocalDate dateReserv = LocalDate.parse(champs[4], formatter);
@@ -194,13 +195,12 @@ public class LstReservController implements Initializable{
 			goToRoom();
     		this.reservationModel.deleteReservationWeb(selectedItem);                		                		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
     
     
-    private void forProfessionnel(String nomSocieteWeb, String telephoneWeb) {	
+    private void insertForProfessionnel(String nomSocieteWeb, String telephoneWeb) {	
 		String nomSociete = nomSocieteWeb;
 		String telephone = telephoneWeb;
 		
@@ -214,7 +214,7 @@ public class LstReservController implements Initializable{
 		this.clientModel.insertClient(telephone, idTypeClient);
     }
 
-	private void forParticulier(String nom, String prenom, String telephonePart) {		
+	private void insertForParticulier(String nom, String prenom, String telephonePart) {		
 		String nomParticulier = nom;
 		String prenomParticulier = prenom;
 		String telephone = telephonePart;

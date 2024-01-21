@@ -108,5 +108,68 @@ public class ClientModel {
 		
 		return client;
 	}
+	
+	
+	public void deleteDataClient(int idToDelete, String type) {
+		deletePartPro(idToDelete, type);
+		deleteTypeClient(idToDelete);
+		deleteClient(idToDelete);
+	}
+	
+	private void deletePartPro(int idToDelete, String type) {
+		try {
+	        String tableName = (type.equals("particulier")) ? "particulier" : "professionel";
+			String queryReservation = "DELETE FROM " + tableName
+									+ " WHERE id_pro_part = "
+									+ "(SELECT id_pro_part "
+									+ 		"FROM type_client "
+									+ 		"WHERE id_type_client = "
+									+ 			"(SELECT id_type_client "
+									+ 			" FROM client WHERE id_client = "
+									+ 				"(SELECT id_client "
+									+ 				"FROM reservation "
+									+ 				" WHERE id_reservation = ?)));";
+				PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
+				delPart.setInt(1, idToDelete);
+				delPart.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	private void deleteTypeClient(int idToDelete) {
+		try {
+			String queryReservation = "DELETE FROM type_client"
+									+ " WHERE id_type_client = "
+									+ 		"(SELECT id_type_client"
+									+ 		" FROM client WHERE id_client ="
+									+ 			" (SELECT id_client"
+									+ 			" FROM reservation"
+									+ 			" WHERE id_reservation = ?));";
+			PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
+			delPart.setInt(1, idToDelete);
+			delPart.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	private void deleteClient(int idToDelete) {
+		try {
+			String queryReservation = "DELETE FROM client"
+					+ " WHERE id_client = "
+					+ 		"(SELECT id_client"
+					+ 		" FROM reservation"
+					+ 		" WHERE id_reservation = ?);";
+			PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
+			delPart.setInt(1, idToDelete);
+			delPart.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 
 }
