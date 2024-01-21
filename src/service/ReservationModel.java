@@ -141,6 +141,7 @@ public class ReservationModel {
 			type = "professionnel";
 		}
 		this.clientModel.deleteDataClient(idToDelete, type);
+		deleteReservation(idToDelete);
 		
 		
 	}
@@ -151,10 +152,9 @@ public class ReservationModel {
 					+ " WHERE id_client = "
 					+ 		"(SELECT id_client"
 					+ 		" FROM reservation"
-					+ 		" WHERE id_reservation = ?));";
+					+ 		" WHERE id_reservation = ?);";
 			PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
-			int paramIndex = 0;
-			delPart.setInt(paramIndex++, idToDelete);
+			delPart.setInt(1, idToDelete);
 			delPart.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
