@@ -76,11 +76,12 @@ public class LstReservModele {
 				ResultSet resultSet = pstReservation.executeQuery()) {
 			
 			while (resultSet.next()) {
-				String resultRow = resultSet.getString("prenom") + " " +
-						resultSet.getString("nom") + " " +
-						resultSet.getString("telephone") + " " +
-						resultSet.getInt("nbr_personne") + " " +
-						resultSet.getDate("date");
+				String resultRow = resultSet.getString("prenom") + " | " +
+						resultSet.getString("nom") + " | " +
+						resultSet.getString("telephone") + " | " +
+						resultSet.getInt("nbr_personne") + " | " +
+						resultSet.getDate("date") + " | " +
+						resultSet.getInt("idReservation");
 				
 				resultListPart.add(resultRow);
 			}
@@ -97,7 +98,7 @@ public class LstReservModele {
 			return resultListPro;
 		}
 		
-		String queryGetReserv = "SELECT pro.nom_societe, cli.telephone, res.nbr_personne, res.date " +
+		String queryGetReserv = "SELECT res.id_reservation idReservation, pro.nom_societe, cli.telephone, res.nbr_personne, res.date " +
 								"FROM reservation res " +
 								"JOIN client cli ON res.id_client = cli.id_client " +
 								"JOIN type_client tcli ON cli.id_type_client = tcli.id_type_client " +
@@ -108,10 +109,11 @@ public class LstReservModele {
 				ResultSet resultSet = pstReservation.executeQuery()) {
 			
 			while (resultSet.next()) {
-				String resultRow = resultSet.getString("nom_societe") + " " +
-						resultSet.getString("telephone") + " " +
-						resultSet.getInt("nbr_personne") + " " +
-						resultSet.getDate("date");
+				String resultRow = resultSet.getString("nom_societe") + " | " +
+						resultSet.getString("telephone") + " | " +
+						resultSet.getInt("nbr_personne") + " | " +
+						resultSet.getDate("date") + " | " +
+						resultSet.getInt("idReservation");
 				
 				resultListPro.add(resultRow);
 			}

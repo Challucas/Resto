@@ -20,10 +20,24 @@ import entity.Table;
 public class ReservationModel {
 	
 	private Connection conn;
+    ClientModel clientModel;
+    ConnectModel model;
+
 	
 	public ReservationModel(Connect connect) {
 		this.conn = connect.conn;
+		initializeModels();
 	}
+	
+	private void initializeModels() {
+		try {			
+			model = new ConnectModel();	
+			clientModel = new ClientModel(model.getConnect());			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 	
 	public void insertReservation(Reservation reservation) {
 		if(!isTableReservedOnDate(reservation.getIdTable().getIdTable(), reservation.getDate())) {			
@@ -115,8 +129,39 @@ public class ReservationModel {
 	}
 	
 	
-	public void deleteReservationBDD() {
+	public void deleteReservationBDD(String selectedItem) {
+		String[] champs = selectedItem.split("\\s*\\|\\s*");	
+		
+		String type = "";
+		int idToDelete = Integer.parseInt(champs[champs.length - 1].trim());
+		if(champs.length == 6) {
+			type = "particulier";
+		}
+		else if (champs.length == 5 ){
+			type = "professionnel";
+		}
+		this.clientModel.deleteDataClient(idToDelete, type);
+		
+		
 	}
+	
+	private void deleteReservation(int idToDelete) {
+		try {
+			String queryReservation = "DELETE FROM reservation"
+					+ " WHERE id_client = "
+					+ 		"(SELECT id_client"
+					+ 		" FROM reservation"
+					+ 		" WHERE id_reservation = ?));";
+			PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
+			int paramIndex = 0;
+			delPart.setInt(paramIndex++, idToDelete);
+			delPart.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
 	
 	
 
@@ -139,8 +184,6 @@ public class ReservationModel {
 
 	                if (parts.length >= 1) {
 	                    int id = Integer.parseInt(parts[0].trim());
-
-	                    // Écrivez la ligne dans le fichier temporaire uniquement si l'ID ne correspond pas à celui à supprimer
 	                    if (id != idToDelete) {
 	                        writer.write(lineRead);
 	                        writer.newLine();

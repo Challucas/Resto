@@ -97,16 +97,16 @@ public class CreateReservFormController implements Initializable{
     @FXML
     void validateForm(MouseEvent event) throws IOException {
         if (clientTypeParticular.equals(selectedClient)) {
-        	forParticulier();
+        	insertForParticulier();
         } else if (clientTypeProfessional.equals(selectedClient)) {
-        	forProfessionnel();    
+        	insertForProfessionnel();    
         }
         this.dateSelected = selectDate.getValue();
         this.nbrPeople = Integer.parseInt(inputNbr.getText());
         goToRoom(event);
     }
 
-	private void forProfessionnel() {	
+	private void insertForProfessionnel() {	
 		String nomSociete = inputSociete.getText();
 		String telephone = inputTel.getText();
 		
@@ -120,7 +120,7 @@ public class CreateReservFormController implements Initializable{
 		this.clientModel.insertClient(telephone, idTypeClient);
     }
 
-	private void forParticulier() {		
+	private void insertForParticulier() {		
 		String nomParticulier = inputNom.getText();
 		String prenomParticulier = inputPrenom.getText();
 		String telephone = inputTel.getText();
