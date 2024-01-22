@@ -1,7 +1,3 @@
-14 ; Professionnel ; CodeCrafters ; +330741258963 ; 1 ; 25/05/2024
-15 ; Professionnel ; InnovateHub ; +33698521476 ; 4 ; 30/03/2024
-16 ; particulier ; Manon ; Thomas ; +33123456789 ; 6 ; 19/12/2022
-17 ; particulier ; Louis ; Durand ; +330689754123 ; 2 ; 07/04/2024
 18 ; Professionnel ; TechWise ; +33158749632 ; 4 ; 30/03/2024
 19 ; Professionnel ; DataExperts ; +33654781236 ; 4 ; 30/03/2024
 20 ; Professionnel ; Quantum Services ; +330741258963 ; 6 ; 05/04/2024
