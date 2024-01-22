@@ -1,4 +1,3 @@
-21 ; particulier ; Alice ; Mercier ; +33698521476 ; 6 ; 19/12/2022
 23 ; Professionnel ; Future Tech ; +330689754123 ; 2 ; 18/11/2024
 24 ; particulier ; Léo ; Garcia ; +33158749632 ; 3 ; 02/11/2022
 25 ; Professionnel ; DataInsights ; +33654781236 ; 7 ; 07/08/2024
