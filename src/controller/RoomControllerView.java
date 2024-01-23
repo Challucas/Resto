@@ -7,11 +7,16 @@ import java.util.ResourceBundle;
 
 import entity.Client;
 import entity.Reservation;
+import javafx.animation.PauseTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import service.ClientModel;
 import service.ConnectModel;
 import service.ReservationModel;
@@ -47,6 +52,9 @@ public class RoomControllerView implements Initializable{
     @FXML
     private ImageView selectedTable4;
     
+    @FXML
+    private ImageView waiter;
+    
     
     private LocalDate dateSelected;
     
@@ -66,6 +74,7 @@ public class RoomControllerView implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	initializeModels();
     	configureDatePicker();
+    	waiterAnimation();
 	}   
     
     private void initializeModels() {
@@ -78,6 +87,45 @@ public class RoomControllerView implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    private void waiterAnimation() {
+    	RotateTransition rotate90 = new RotateTransition(Duration.millis(1500), waiter);
+    	rotate90.setByAngle(90);
+
+    	PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+
+    	TranslateTransition translateMinus180 = new TranslateTransition(Duration.millis(2000), waiter);
+    	translateMinus180.setByX(-180);
+
+    	PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
+
+    	RotateTransition rotateMinus180 = new RotateTransition(Duration.millis(1500), waiter);
+    	rotateMinus180.setByAngle(-180);
+
+    	PauseTransition pause3 = new PauseTransition(Duration.seconds(1));
+
+    	TranslateTransition translate180 = new TranslateTransition(Duration.millis(2000), waiter);
+    	translate180.setByX(180);
+    	
+    	RotateTransition rotateSecond90 = new RotateTransition(Duration.millis(1500), waiter);
+    	rotateSecond90.setByAngle(90);
+
+    	SequentialTransition sequence = new SequentialTransition(
+			waiter,
+    	    rotate90,
+    	    pause1,
+    	    translateMinus180,
+    	    pause2,
+    	    rotateMinus180,
+    	    pause3,
+    	    translate180,
+    	    rotateSecond90
+    	);
+
+    	sequence.setCycleCount(SequentialTransition.INDEFINITE);
+
+    	sequence.play();
     }
      
     private void configureDatePicker() {

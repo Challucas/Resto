@@ -12,7 +12,7 @@
       <AnchorPane prefHeight="540.0" prefWidth="838.0" style="-fx-background-color: #dbdbdb;" BorderPane.alignment="CENTER">
          <children>
            	<fx:include source="backgroundRoom.fxml" />
-            <DatePicker fx:id="selectedDate" editable="false" layoutX="185.0" layoutY="224.0" promptText="Sélectionner une date" />
+            <DatePicker fx:id="selectedDate" editable="false" layoutX="143.0" layoutY="300.0" promptText="Sélectionner une date" />
             <CheckBox fx:id="tableFourPlace1" disable="true" layoutX="122.0" layoutY="500.0" mnemonicParsing="false" prefHeight="134.0" prefWidth="214.0" visible="false" />
             <CheckBox fx:id="tableFourPlace2" disable="true" layoutX="435.0" layoutY="359.0" mnemonicParsing="false" prefHeight="218.0" prefWidth="132.0" visible="false" />
             <CheckBox fx:id="tableSixPlace" disable="true" layoutX="665.0" layoutY="501.0" mnemonicParsing="false" prefHeight="203.0" prefWidth="217.0" visible="false" />
@@ -35,6 +35,11 @@
             <ImageView fx:id="selectedTable4" fitHeight="245.0" fitWidth="198.0" layoutX="687.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" visible="false">
                <image>
                   <Image url="@../assets/img/rachure.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="waiter" fitHeight="68.0" fitWidth="68.0" layoutX="357.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/img/waiter.png" />
                </image>
             </ImageView>
          </children>
