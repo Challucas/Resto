@@ -1,6 +1,6 @@
 package entity;
 
-public class Pro {
+public class Pro extends Client{
 
 	private Integer idProPart;
     private String nomSociete;

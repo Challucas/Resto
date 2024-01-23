@@ -134,9 +134,9 @@ public class RoomControllerView implements Initializable{
     	}
     }
     
-    public void currentClient(int client) {  	
-    	this.currentClient =  this.clientModel.getClientByIdTypeClient(client);
-    }
+//    public void currentClient(int client) {  	
+//    	this.currentClient =  this.clientModel.getClientByIdTypeClient(client);
+//    }
     
     public ArrayList<Integer> tableSelected() {
     	ArrayList<Integer> selectedTables = new ArrayList<>();

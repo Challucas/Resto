@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import entity.Client;
+import entity.Part;
+import entity.Pro;
 import entity.Reservation;
 import entity.Table;
 import javafx.fxml.FXML;
@@ -62,6 +64,7 @@ public class RoomController implements Initializable{
     
     private LocalDate dateSelected;
     private int nbrPeople;
+    private int idTypeClient;
     
     ConnectModel connectModel;
     TableModel tableModel;
@@ -69,6 +72,8 @@ public class RoomController implements Initializable{
     ReservationModel reservationModel;
     
     Client currentClient = new Client();
+    Part currentPart = new Part();
+    Pro currentPro = new Pro();
     
     private static final int idTableFourPlace1 = 1;
     private static final int idTableFourPlace2 = 2;
@@ -91,6 +96,16 @@ public class RoomController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public void setClient(Pro pro, Part part) {
+    	if(pro != null) {
+    		this.currentPro = pro;
+    	}
+    	
+    	if(part != null) {
+    		this.currentPart = part;
+    	}
     }
     
     private void setupTableSelectionListeners() {
@@ -125,16 +140,23 @@ public class RoomController implements Initializable{
     	updateTablesState(reservations);
     }
     
-    public void currentClient(int client) {  	
-    	this.currentClient =  this.clientModel.getClientByIdTypeClient(client);
-    }
-    
     public void setNbrPeople(int nbr) {
     	this.nbrPeople = nbr;
     }
     
     @FXML
     void validReservation(MouseEvent event) throws IOException {
+    	createClient(this.currentPro, this.currentPart);
+    	if(this.currentPart.getNom() != null) {
+    		this.clientModel.insertClient(this.currentPart.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	}
+    	
+    	if(this.currentPro.getNomSociete() != null) {
+    		this.clientModel.insertClient(this.currentPro.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	}
+    	int idClient = this.clientModel.getClientByIdProPart(this.idTypeClient);
+    	this.currentClient.setIdClient(idClient);
+    	
     	ArrayList<Integer> choosedTable = tableSelected();  
     	for(Integer idTable : choosedTable) {		
     		Table table = this.tableModel.getIdTable(idTable);
@@ -143,6 +165,22 @@ public class RoomController implements Initializable{
     	}
     	
     	goToHome(event);
+    }
+    
+    private Client createClient(Pro pro, Part part) {
+    	
+    	if(pro.getNomSociete() != null) {
+    		this.idTypeClient = this.clientModel.insertProfessionnel(pro);
+    		this.currentClient.setIdProPart(this.idTypeClient);
+    		this.currentClient.setIsParticulier(false);
+    	}
+    	
+    	if(part.getNom() != null) {
+    		this.idTypeClient = this.clientModel.insertParticulier(part);
+    		this.currentClient.setIdProPart(this.idTypeClient);
+    		this.currentClient.setIsParticulier(true);
+    	}    	
+    	return this.currentClient;
     }
     
     private Reservation createReservation(Table table) {
