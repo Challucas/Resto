@@ -1,11 +1,12 @@
+<<<<<<< Updated upstream
 24 ; particulier ; Léo ; Garcia ; +33158749632 ; 3 ; 02/11/2022
 25 ; Professionnel ; DataInsights ; +33654781236 ; 7 ; 07/08/2024
+=======
+>>>>>>> Stashed changes
 26 ; particulier ; Maxime ; Leroux ; +330741258963 ; 1 ; 25/03/2023
-27 ; Professionnel ; ABC Solutions ; +33698521476 ; 5 ; 15/06/2024
 28 ; particulier ; Jules ; Lemoine ; +33123456789 ; 9 ; 30/09/2023
 31 ; Professionnel ; Global Solutions ; +33654781236 ; 3 ; 10/09/2024
 32 ; Professionnel ; DataCraft ; +330741258963 ; 7 ; 07/08/2024
-33 ; particulier ; Manon ; Petit ; +33698521476 ; 7 ; 10/08/2023
 34 ; particulier ; Pierre ; Rousseau ; +33123456789 ; 3 ; 02/11/2022
 35 ; Professionnel ; Quantum Innovations ; +33654781236 ; 2 ; 18/11/2024
 36 ; particulier ; Lucas ; Lemoine ; +33158749632 ; 1 ; 25/03/2023
