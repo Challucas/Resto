@@ -15,10 +15,6 @@
          <children>
            	<fx:include source="backgroundRoom.fxml" />
              <DatePicker fx:id="selectedDate" editable="false" layoutX="185.0" layoutY="224.0" promptText="Sélectionner une date" />
-            <CheckBox fx:id="tableFourPlace1" layoutX="122.0" layoutY="500.0" mnemonicParsing="false" opacity="0.0" prefHeight="134.0" prefWidth="214.0" />
-            <CheckBox fx:id="tableFourPlace2" layoutX="435.0" layoutY="359.0" mnemonicParsing="false" opacity="0.0" prefHeight="218.0" prefWidth="132.0" />
-            <CheckBox fx:id="tableSixPlace" layoutX="665.0" layoutY="501.0" mnemonicParsing="false" opacity="0.0" prefHeight="203.0" prefWidth="217.0" />
-            <CheckBox fx:id="tableEightPlace" layoutX="616.0" layoutY="193.0" mnemonicParsing="false" opacity="0.0" prefHeight="214.0" prefWidth="315.0" />
             <ImageView fx:id="selectedTable1" fitHeight="363.0" fitWidth="150.0" layoutX="154.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" visible="false">
                <image>
                   <Image url="@../assets/img/rachure.png" />
@@ -49,6 +45,10 @@
                   <Image url="@../assets/img/rectangle.png" />
                </image>
             </ImageView>
+            <CheckBox fx:id="tableFourPlace1" layoutX="122.0" layoutY="500.0" mnemonicParsing="false" prefHeight="134.0" prefWidth="214.0" />
+            <CheckBox fx:id="tableFourPlace2" layoutX="435.0" layoutY="359.0" mnemonicParsing="false" prefHeight="218.0" prefWidth="132.0" />
+            <CheckBox fx:id="tableEightPlace" layoutX="616.0" layoutY="193.0" mnemonicParsing="false" prefHeight="214.0" prefWidth="315.0" />
+            <CheckBox fx:id="tableSixPlace" layoutX="665.0" layoutY="501.0" mnemonicParsing="false" prefHeight="203.0" prefWidth="217.0" />
          </children>
       </AnchorPane>
    </center>
