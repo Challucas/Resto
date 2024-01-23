@@ -1,4 +1,4 @@
-24 ; particulier ; LÃ©o ; Garcia ; +33158749632 ; 3 ; 02/11/2022
+24 ; particulier ; Léo ; Garcia ; +33158749632 ; 3 ; 02/11/2022
 25 ; Professionnel ; DataInsights ; +33654781236 ; 7 ; 07/08/2024
 26 ; particulier ; Maxime ; Leroux ; +330741258963 ; 1 ; 25/03/2023
 27 ; Professionnel ; ABC Solutions ; +33698521476 ; 5 ; 15/06/2024
@@ -15,10 +15,10 @@
 40 ; Professionnel ; Quantum Innovations ; +330741258963 ; 2 ; 18/11/2024
 41 ; particulier ; Emma ; Mercier ; +33698521476 ; 10 ; 08/11/2022
 42 ; Professionnel ; Global Innovations ; +33654781236 ; 2 ; 18/11/2024
-43 ; particulier ; ChloÃ© ; Nguyen ; +330689754123 ; 6 ; 19/12/2022
+43 ; particulier ; Chloé ; Nguyen ; +330689754123 ; 6 ; 19/12/2022
 44 ; Professionnel ; IdeaMasters ; +33158749632 ; 1 ; 25/05/2024
 45 ; Professionnel ; TechVision ; +330741258963 ; 10 ; 08/12/2024
-46 ; particulier ; LÃ©a ; Rousseau ; +33698521476 ; 5 ; 14/06/2024
+46 ; particulier ; Léa ; Rousseau ; +33698521476 ; 5 ; 14/06/2024
 47 ; Professionnel ; Future Systems ; +33654781236 ; 9 ; 12/10/2024
 48 ; particulier ; Lucas ; Moreau ; +33158749632 ; 1 ; 25/03/2023
 49 ; Professionnel ; Future Tech ; +33654781236 ; 2 ; 18/11/2024

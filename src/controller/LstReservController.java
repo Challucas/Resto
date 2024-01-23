@@ -59,7 +59,9 @@ public class LstReservController implements Initializable{
     
     private Integer nbrPeople;
     private LocalDate dateSelected;
-    private int idTypeClient;
+    
+    Part part = new Part();
+    Pro pro = new Pro();
     
     //TODO Initialize models and lists
     
@@ -219,14 +221,9 @@ public class LstReservController implements Initializable{
 		String nomSociete = nomSocieteWeb;
 		String telephone = telephoneWeb;
 		
-		Pro pro = new Pro();
-		pro.setNomSociete(nomSociete);
-		
-		int idPro = this.clientModel.insertProfessionnel(pro);
-		
-		this.idTypeClient = this.clientModel.insertTypeClient(idPro, false);
-		
-		this.clientModel.insertClient(telephone, idTypeClient);
+		this.pro.setNomSociete(nomSociete);
+		this.pro.setTelephone(telephone);
+		this.pro.setIsParticulier(false);
     }
 
 	private void insertForParticulier(String nom, String prenom, String telephonePart) {		
@@ -234,15 +231,10 @@ public class LstReservController implements Initializable{
 		String prenomParticulier = prenom;
 		String telephone = telephonePart;
 		
-		Part part = new Part();
-		part.setNom(nomParticulier);
-		part.setPrenom(prenomParticulier);
-		
-		int idPart = this.clientModel.insertParticulier(part);
-		
-		this.idTypeClient = this.clientModel.insertTypeClient(idPart, true);
-		
-		this.clientModel.insertClient(telephone, idTypeClient);
+		this.part.setNom(nomParticulier);
+		this.part.setPrenom(prenomParticulier);
+		this.part.setTelephone(telephone);
+		this.part.setIsParticulier(true);
 	}
 	
 	@FXML
@@ -253,8 +245,8 @@ public class LstReservController implements Initializable{
 	        Scene sceneRoom = new Scene(room);
 	        RoomController roomController = loader.getController();
 	        roomController.setSelectedDate(this.dateSelected);
-	        roomController.currentClient(this.idTypeClient);
 	        roomController.setNbrPeople(this.nbrPeople);
+	        roomController.setClient(this.pro, this.part);
 
 	        Stage stage = (Stage) listViewReservWeb.getScene().getWindow();
 	        stage.setScene(sceneRoom);

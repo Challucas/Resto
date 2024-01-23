@@ -57,48 +57,29 @@ public class ClientModel {
 		return idPro;
 	}
 	
-	public int insertTypeClient(int idProPart, boolean isParticulier) {
-		int idTypeClient = 0;
+	public void insertClient(String telephone, int idProPart, boolean isParticulier) {
 		try {
-			String queryTypeClient = "INSERT INTO type_client (is_particulier, id_pro_part) VALUES (?, ?)";
-			PreparedStatement pstTypeClient = this.conn.prepareStatement(queryTypeClient, Statement.RETURN_GENERATED_KEYS);
-			int paramIndex = 0;
-			pstTypeClient.setBoolean(++paramIndex, isParticulier);
-			pstTypeClient.setInt(++paramIndex, idProPart);
-			pstTypeClient.executeUpdate();
-			ResultSet rs = pstTypeClient.getGeneratedKeys();
-			if(rs.next()) {
-				idTypeClient = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return idTypeClient;
-	}
-	
-	public void insertClient(String telephone, int idTypeClient) {
-		try {
-			String queryClient = "INSERT INTO client (telephone, id_type_client) VALUES (?, ?)";
+			String queryClient = "INSERT INTO client (telephone, id_pro_part, is_particulier) VALUES (?, ?, ?)";
 			PreparedStatement pstClient = this.conn.prepareStatement(queryClient);
 			int paramIndex = 0;
 			pstClient.setString(++paramIndex, telephone);
-			pstClient.setInt(++paramIndex, idTypeClient);
+			pstClient.setInt(++paramIndex, idProPart);
+			pstClient.setBoolean(++paramIndex, isParticulier);
 			pstClient.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public Client getClientByIdTypeClient(int idTypeClient) {
-		Client client = new Client();
-		
+	public int getClientByIdProPart(int idProPart) {
+		int idClient = 0;
 		try {
-			String queryClient = "SELECT id_client FROM client WHERE id_type_client = ?";
+			String queryClient = "SELECT id_client FROM client WHERE id_pro_part = ?";
 			PreparedStatement pstClient = this.conn.prepareStatement(queryClient);
-			pstClient.setInt(1, idTypeClient);
+			pstClient.setInt(1, idProPart);
 			ResultSet rs = pstClient.executeQuery();
 			if(rs.next()) {
-				client.setIdClient(rs.getInt("id_client"));
+				idClient = rs.getInt("id_client");
 			}
 			rs.close();
 			pstClient.close();
@@ -106,13 +87,13 @@ public class ClientModel {
 			e.printStackTrace();
 		}
 		
-		return client;
+		return idClient;
 	}
 	
 	
 	public void deleteDataClient(int idToDelete, String type) {
 		deletePartPro(idToDelete, type);
-		deleteTypeClient(idToDelete);
+//		deleteTypeClient(idToDelete);
 		deleteClient(idToDelete);
 	}
 	
@@ -121,35 +102,14 @@ public class ClientModel {
 	        String tableName = (type.equals("particulier")) ? "particulier" : "professionel";
 			String queryReservation = "DELETE FROM " + tableName
 									+ " WHERE id_pro_part = "
-									+ "(SELECT id_pro_part "
-									+ 		"FROM type_client "
-									+ 		"WHERE id_type_client = "
-									+ 			"(SELECT id_type_client "
-									+ 			" FROM client WHERE id_client = "
-									+ 				"(SELECT id_client "
-									+ 				"FROM reservation "
-									+ 				" WHERE id_reservation = ?)));";
+									+	"(SELECT id_pro_part "
+						            + 		" FROM client WHERE id_client = "
+							 		+		 "(SELECT id_client "
+									+ 		  "FROM reservation "
+									+ 		   " WHERE id_reservation = ?));";
 				PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
 				delPart.setInt(1, idToDelete);
 				delPart.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	
-	private void deleteTypeClient(int idToDelete) {
-		try {
-			String queryReservation = "DELETE FROM type_client"
-									+ " WHERE id_type_client = "
-									+ 		"(SELECT id_type_client"
-									+ 		" FROM client WHERE id_client ="
-									+ 			" (SELECT id_client"
-									+ 			" FROM reservation"
-									+ 			" WHERE id_reservation = ?));";
-			PreparedStatement delPart = this.conn.prepareStatement(queryReservation);
-			delPart.setInt(1, idToDelete);
-			delPart.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

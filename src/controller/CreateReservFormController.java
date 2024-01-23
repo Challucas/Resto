@@ -60,10 +60,12 @@ public class CreateReservFormController implements Initializable{
     private String selectedClient;
     private Integer nbrPeople;
     private LocalDate dateSelected;
-    private int idTypeClient;
     
     private static final String clientTypeProfessional = "professionnel";
     private static final String clientTypeParticular = "particulier";
+    
+    Part part = new Part();
+    Pro pro = new Pro();
     
     ConnectModel connectModel;
     ClientModel clientModel;
@@ -146,14 +148,9 @@ public class CreateReservFormController implements Initializable{
 		String nomSociete = inputSociete.getText();
 		String telephone = inputTel.getText();
 		
-		Pro pro = new Pro();
-		pro.setNomSociete(nomSociete);
-		
-		int idPro = this.clientModel.insertProfessionnel(pro);
-		
-		this.idTypeClient = this.clientModel.insertTypeClient(idPro, false);
-		
-		this.clientModel.insertClient(telephone, idTypeClient);
+		this.pro.setNomSociete(nomSociete);
+		this.pro.setTelephone(telephone);
+		this.pro.setIsParticulier(false);
     }
 
 	private void insertForParticulier() {		
@@ -161,15 +158,10 @@ public class CreateReservFormController implements Initializable{
 		String prenomParticulier = inputPrenom.getText();
 		String telephone = inputTel.getText();
 		
-		Part part = new Part();
-		part.setNom(nomParticulier);
-		part.setPrenom(prenomParticulier);
-		
-		int idPart = this.clientModel.insertParticulier(part);
-		
-		this.idTypeClient = this.clientModel.insertTypeClient(idPart, true);
-		
-		this.clientModel.insertClient(telephone, idTypeClient);
+		this.part.setNom(nomParticulier);
+		this.part.setPrenom(prenomParticulier);
+		this.part.setTelephone(telephone);
+		this.part.setIsParticulier(true);
 	}
 	
     @FXML
@@ -180,8 +172,8 @@ public class CreateReservFormController implements Initializable{
 	        Scene sceneRoom = new Scene(room);
 	        RoomController roomController = loader.getController();
 	        roomController.setSelectedDate(this.dateSelected);
-	        roomController.currentClient(this.idTypeClient);
 	        roomController.setNbrPeople(this.nbrPeople);
+	        roomController.setClient(this.pro, this.part);
 
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	        stage.setScene(sceneRoom);
