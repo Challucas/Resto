@@ -102,34 +102,63 @@ public class CreateReservFormController implements Initializable{
     }
 
     @FXML
-    void validateForm(MouseEvent event) throws IOException {
-        String inputNbrValue = inputNbr.getText();
-        if (inputNbrValue == null || inputNbrValue.trim().isEmpty()) {
-            this.labelError.setText("Merci de renseigner le nombre de personnes");
-            return;
-        }
-
+    void validateForm(MouseEvent event) throws IOException {      
+    	String inputNbrValue = inputNbr.getText();
         try {
             this.nbrPeople = Integer.parseInt(inputNbrValue);
             this.dateSelected = selectDate.getValue();
-            int nbrPlaceDispo = getNbrPlaceDispoRoom(this.dateSelected);
-            if (this.nbrPeople > getNbrPlaceTotalRoom()) {
-                this.labelError.setText("Le nombre maximum de places dans le restaurant est de 22");
-            } else if (this.nbrPeople > nbrPlaceDispo) {
-                this.labelError.setText("Pour cette date, le nombre de places disponibles dans le \n restaurant est de " + nbrPlaceDispo);
-            } else if (this.nbrPeople <= 0) {
-                this.labelError.setText("Merci de mettre au moins une personne");
-            } else {
-                if (clientTypeParticular.equals(selectedClient)) {
-                    insertForParticulier();
-                } else if (clientTypeProfessional.equals(selectedClient)) {
-                    insertForProfessionnel();
-                }
-                goToRoom(event);
+
+            if (!validateReservationCapacity()) {
+                return;
             }
+            
+            if(!validateCalendar()) {
+            	return;
+            }
+            
+            if (clientTypeParticular.equals(selectedClient)) {
+                if(!insertForParticulier()) {
+                	return;
+                }
+            } else if (clientTypeProfessional.equals(selectedClient)) {
+                if(!insertForProfessionnel()) {
+                	return;
+                }
+            }
+            
+            goToRoom(event);
         } catch (NumberFormatException e) {
             this.labelError.setText("Veuillez entrer un nombre valide");
         }
+    }
+    
+    private boolean validateReservationCapacity() {
+        String inputNbrValue = inputNbr.getText();
+        if (inputNbrValue == null || inputNbrValue.trim().isEmpty()) {
+            this.labelError.setText("Merci de renseigner le nombre de personnes");
+            return false;
+        }
+        int nbrPlaceDispo = getNbrPlaceDispoRoom(this.dateSelected);
+        if (this.nbrPeople > getNbrPlaceTotalRoom()) {
+            this.labelError.setText("Le nombre maximum de places dans le restaurant est de 22");
+            return false;
+        } else if (this.nbrPeople > nbrPlaceDispo) {
+            this.labelError.setText("Pour cette date, le nombre de places disponibles dans le \nrestaurant est de " + nbrPlaceDispo);
+            return false;
+        } else if (this.nbrPeople <= 0) {
+            this.labelError.setText("Merci de mettre au moins une personne");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean validateCalendar() {
+    	LocalDate date = selectDate.getValue();
+        if (date == null) {
+            this.labelError.setText("Merci de renseigner une date");
+            return false;
+        }
+        return true;
     }
 
     
@@ -153,24 +182,53 @@ public class CreateReservFormController implements Initializable{
     	return 0;
     }
 
-	private void insertForProfessionnel() {	
+	private boolean insertForProfessionnel() {	
 		String nomSociete = inputSociete.getText();
 		String telephone = inputTel.getText();
+		
+		if (nomSociete == null || nomSociete.trim().isEmpty()) {
+	        this.labelError.setText("Merci de renseigner un nom de société");
+	        return false;
+	    }
+		
+		if (telephone == null || telephone.trim().isEmpty()) {
+			this.labelError.setText("Merci de renseigner un numéro de téléphone");
+			return false;
+		}
 		
 		this.pro.setNomSociete(nomSociete);
 		this.pro.setTelephone(telephone);
 		this.pro.setIsParticulier(false);
+		
+		return true;
     }
 
-	private void insertForParticulier() {		
+	private boolean insertForParticulier() {		
 		String nomParticulier = inputNom.getText();
 		String prenomParticulier = inputPrenom.getText();
 		String telephone = inputTel.getText();
+			
+		if (nomParticulier == null || nomParticulier.trim().isEmpty()) {
+	        this.labelError.setText("Merci de renseigner un nom");
+	        return false;
+	    }
+		
+		if (prenomParticulier == null || prenomParticulier.trim().isEmpty()) {
+			this.labelError.setText("Merci de renseigner un prénom");
+			return false;
+		}
+		
+		if (telephone == null || telephone.trim().isEmpty()) {
+			this.labelError.setText("Merci de renseigner un numéro de téléphone");
+			return false;
+		}
 		
 		this.part.setNom(nomParticulier);
 		this.part.setPrenom(prenomParticulier);
 		this.part.setTelephone(telephone);
 		this.part.setIsParticulier(true);
+		
+		return true;
 	}
 	
     @FXML
