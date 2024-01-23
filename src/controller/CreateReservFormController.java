@@ -103,26 +103,35 @@ public class CreateReservFormController implements Initializable{
 
     @FXML
     void validateForm(MouseEvent event) throws IOException {
-    	this.nbrPeople = Integer.parseInt(inputNbr.getText());
-    	this.dateSelected = selectDate.getValue();
-    	int nbrPlaceDispo = getNbrPlaceDispoRoom(this.dateSelected);
-    	if(this.nbrPeople > getNbrPlaceTotalRoom()) {
-			this.labelError.setText("Le nombre maximum de place dans le restaurant est de 22");
+        String inputNbrValue = inputNbr.getText();
+        if (inputNbrValue == null || inputNbrValue.trim().isEmpty()) {
+            this.labelError.setText("Merci de renseigner le nombre de personnes");
+            return;
         }
-    	else if( this.nbrPeople > nbrPlaceDispo)
-    	{
-    		this.labelError.setText("Pour cette date, le nombre de place dispo dans le \n restaurant est de " + nbrPlaceDispo);    		
-    	}
-    	else {
-    		if (clientTypeParticular.equals(selectedClient)) {
-    			insertForParticulier();
-    		} else if (clientTypeProfessional.equals(selectedClient)) {
-    			insertForProfessionnel();    
-    		}
-    	
-    		goToRoom(event);        	    		
-    	}
+
+        try {
+            this.nbrPeople = Integer.parseInt(inputNbrValue);
+            this.dateSelected = selectDate.getValue();
+            int nbrPlaceDispo = getNbrPlaceDispoRoom(this.dateSelected);
+            if (this.nbrPeople > getNbrPlaceTotalRoom()) {
+                this.labelError.setText("Le nombre maximum de places dans le restaurant est de 22");
+            } else if (this.nbrPeople > nbrPlaceDispo) {
+                this.labelError.setText("Pour cette date, le nombre de places disponibles dans le \n restaurant est de " + nbrPlaceDispo);
+            } else if (this.nbrPeople <= 0) {
+                this.labelError.setText("Merci de mettre au moins une personne");
+            } else {
+                if (clientTypeParticular.equals(selectedClient)) {
+                    insertForParticulier();
+                } else if (clientTypeProfessional.equals(selectedClient)) {
+                    insertForProfessionnel();
+                }
+                goToRoom(event);
+            }
+        } catch (NumberFormatException e) {
+            this.labelError.setText("Veuillez entrer un nombre valide");
+        }
     }
+
     
     public int getNbrPlaceTotalRoom() {
     	try {

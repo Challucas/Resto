@@ -1,6 +1,5 @@
 28 ; particulier ; Jules ; Lemoine ; +33123456789 ; 9 ; 30/09/2023
 31 ; Professionnel ; Global Solutions ; +33654781236 ; 3 ; 10/09/2024
-32 ; Professionnel ; DataCraft ; +330741258963 ; 7 ; 07/08/2024
 34 ; particulier ; Pierre ; Rousseau ; +33123456789 ; 3 ; 02/11/2022
 35 ; Professionnel ; Quantum Innovations ; +33654781236 ; 2 ; 18/11/2024
 36 ; particulier ; Lucas ; Lemoine ; +33158749632 ; 1 ; 25/03/2023
