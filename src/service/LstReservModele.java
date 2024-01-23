@@ -69,7 +69,8 @@ public class LstReservModele {
 		String queryGetReserv = "SELECT res.id_reservation idReservation, par.prenom, par.nom, cli.telephone, res.nbr_personne, res.date " +
 				"FROM reservation res " +
 				"JOIN client cli ON res.id_client = cli.id_client " +
-				"JOIN particulier par ON cli.id_pro_part = par.id_pro_part ";
+				"JOIN particulier par ON cli.id_pro_part = par.id_pro_part "
+				+ " WHERE cli.is_particulier = 1";
 		
 		try (PreparedStatement pstReservation = this.conn.prepareStatement(queryGetReserv);
 				ResultSet resultSet = pstReservation.executeQuery()) {
@@ -100,7 +101,8 @@ public class LstReservModele {
 		String queryGetReserv = "SELECT res.id_reservation idReservation, pro.nom_societe, cli.telephone, res.nbr_personne, res.date " +
 								"FROM reservation res " +
 								"JOIN client cli ON res.id_client = cli.id_client " +
-								"JOIN professionel pro ON cli.id_pro_part = pro.id_pro_part";
+								"JOIN professionel pro ON cli.id_pro_part = pro.id_pro_part"
+								+ " WHERE cli.is_particulier = 0";
 				
 		
 		try (PreparedStatement pstReservation = this.conn.prepareStatement(queryGetReserv);

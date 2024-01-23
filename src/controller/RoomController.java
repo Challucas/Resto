@@ -162,14 +162,16 @@ public class RoomController implements Initializable{
     			this.labelError.setText("Merci de choisir plus de table pour avoir le \n nombre de place suffisant");
     		}
     		else {
+    			int idClient = 0;
     	    	if(this.currentPart.getNom() != null) {
     	    		this.clientModel.insertClient(this.currentPart.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	    		idClient = this.clientModel.getClientByIdProPart(this.idTypeClient, true);
     	    	}
     	    	
     	    	if(this.currentPro.getNomSociete() != null) {
     	    		this.clientModel.insertClient(this.currentPro.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	    		idClient = this.clientModel.getClientByIdProPart(this.idTypeClient, false);
     	    	}
-    	    	int idClient = this.clientModel.getClientByIdProPart(this.idTypeClient);
     	    	this.currentClient.setIdClient(idClient);
     	    	
     	    	for(Integer idTable : choosedTable) {		
@@ -206,7 +208,7 @@ public class RoomController implements Initializable{
     private Reservation createReservation(Table table) {
     	Reservation reservation = new Reservation();
     	reservation.setIdTable(table);
-    	reservation.setIdClient(currentClient);
+    	reservation.setIdClient(this.currentClient);
     	reservation.setDate(Date.valueOf(this.dateSelected));
     	reservation.setNbrPersonne(this.nbrPeople);
     	

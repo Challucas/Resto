@@ -71,12 +71,13 @@ public class ClientModel {
 		}
 	}
 	
-	public int getClientByIdProPart(int idProPart) {
+	public int getClientByIdProPart(int idProPart, boolean isParticulier) {
 		int idClient = 0;
 		try {
-			String queryClient = "SELECT id_client FROM client WHERE id_pro_part = ?";
+			String queryClient = "SELECT id_client FROM client WHERE id_pro_part = ? AND is_particulier = ?";
 			PreparedStatement pstClient = this.conn.prepareStatement(queryClient);
 			pstClient.setInt(1, idProPart);
+			pstClient.setBoolean(2, isParticulier);
 			ResultSet rs = pstClient.executeQuery();
 			if(rs.next()) {
 				idClient = rs.getInt("id_client");
