@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,6 +53,9 @@ public class CreateReservFormController implements Initializable{
     
     @FXML
     private ImageView btnValidate;
+    
+    @FXML
+    private Label labelError;
     
     private String selectedClient;
     private Integer nbrPeople;
@@ -96,14 +101,45 @@ public class CreateReservFormController implements Initializable{
 
     @FXML
     void validateForm(MouseEvent event) throws IOException {
-        if (clientTypeParticular.equals(selectedClient)) {
-        	insertForParticulier();
-        } else if (clientTypeProfessional.equals(selectedClient)) {
-        	insertForProfessionnel();    
+    	this.nbrPeople = Integer.parseInt(inputNbr.getText());
+    	this.dateSelected = selectDate.getValue();
+    	int nbrPlaceDispo = getNbrPlaceDispoRoom(this.dateSelected);
+    	if(this.nbrPeople > getNbrPlaceTotalRoom()) {
+			this.labelError.setText("Le nombre maximum de place dans le restaurant est de 22");
         }
-        this.dateSelected = selectDate.getValue();
-        this.nbrPeople = Integer.parseInt(inputNbr.getText());
-        goToRoom(event);
+    	else if( this.nbrPeople > nbrPlaceDispo)
+    	{
+    		this.labelError.setText("Pour cette date, le nombre de place dispo dans le \n restaurant est de " + nbrPlaceDispo);    		
+    	}
+    	else {
+    		if (clientTypeParticular.equals(selectedClient)) {
+    			insertForParticulier();
+    		} else if (clientTypeProfessional.equals(selectedClient)) {
+    			insertForProfessionnel();    
+    		}
+    	
+    		goToRoom(event);        	    		
+    	}
+    }
+    
+    public int getNbrPlaceTotalRoom() {
+    	try {
+			return tableModel.getNbrPlaceTotalRoom();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return 0;
+    }
+    
+    public int getNbrPlaceDispoRoom(LocalDate dateSelected) {
+    	try {
+    		return this.tableModel.getNbrPlaceDispoRoom(dateSelected);
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return 0;
     }
 
 	private void insertForProfessionnel() {	
