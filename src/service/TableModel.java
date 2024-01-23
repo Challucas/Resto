@@ -83,7 +83,7 @@ public class TableModel {
 	}	
 
 
-	public int getNbrPlaceChoosed(ArrayList<Integer> choosedTable) throws SQLException {
+	public int getNbrPlaceChoosed(ArrayList<Integer> choosedTable, LocalDate dateSelected) throws SQLException {
 	    int nbrPlaceChoosed = 0;
 	    StringBuilder params = new StringBuilder("(");
 	    for (int i = 0; i < choosedTable.size(); i++) {
@@ -95,7 +95,7 @@ public class TableModel {
 	    params.append(")");
 	    String queryTable = "SELECT SUM(t.nbr_chaise) AS total_chaises" +
 	                        " FROM tables t" +
-	                        " WHERE t.id_table NOT IN (SELECT id_table FROM reservation WHERE date = '2024-01-23')" +
+	                        " WHERE t.id_table NOT IN (SELECT id_table FROM reservation WHERE date = '"+ dateSelected +" ')" +
 	                        " AND t.id_table IN " + params;
 
 	    try (PreparedStatement pstTable = this.conn.prepareStatement(queryTable)) {

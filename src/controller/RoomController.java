@@ -157,7 +157,7 @@ public class RoomController implements Initializable{
     	
     	ArrayList<Integer> choosedTable = tableSelected();  
     	try {
-    		int nbrPlaceChoosed = this.tableModel.getNbrPlaceChoosed(choosedTable);
+    		int nbrPlaceChoosed = this.tableModel.getNbrPlaceChoosed(choosedTable, this.dateSelected);
     		if(this.reservation.getNbrPersonne() > nbrPlaceChoosed) {
     			this.labelError.setText("Merci de choisir plus de table pour avoir le \n nombre de place suffisant");
     		}
