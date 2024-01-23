@@ -102,7 +102,11 @@ public class RoomController implements Initializable{
     
     private void setupTableSelectionListener(CheckBox checkbox, ImageView imageView) {
     	checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-    		imageView.setVisible(newValue);
+    		if(newValue) {
+    			imageView.setVisible(true); 			
+    		} else {
+    			imageView.setVisible(false);
+    		}
     	});
     }
     
