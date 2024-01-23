@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import entity.Table;
 
@@ -80,4 +81,36 @@ public class TableModel {
 		}
 		return nbrPlaceDispo;
 	}	
+
+
+	public int getNbrPlaceChoosed(ArrayList<Integer> choosedTable) throws SQLException {
+	    int nbrPlaceChoosed = 0;
+	    StringBuilder params = new StringBuilder("(");
+	    for (int i = 0; i < choosedTable.size(); i++) {
+	        params.append("?");
+	        if (i < choosedTable.size() - 1) {
+	            params.append(",");
+	        }
+	    }
+	    params.append(")");
+	    String queryTable = "SELECT SUM(t.nbr_chaise) AS total_chaises" +
+	                        " FROM tables t" +
+	                        " WHERE t.id_table NOT IN (SELECT id_table FROM reservation WHERE date = '2024-01-23')" +
+	                        " AND t.id_table IN " + params;
+
+	    try (PreparedStatement pstTable = this.conn.prepareStatement(queryTable)) {
+	        for (int i = 0; i < choosedTable.size(); i++) {
+	            pstTable.setInt(i + 1, choosedTable.get(i));
+	        }
+	        ResultSet rs = pstTable.executeQuery();
+
+	        if (rs.next()) {
+	            nbrPlaceChoosed = rs.getInt(1);
+	        }
+
+	    }
+
+	    return nbrPlaceChoosed;
+	}
+
 }
