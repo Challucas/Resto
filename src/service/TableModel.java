@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import entity.Table;
 
@@ -54,4 +55,29 @@ public class TableModel {
 		
 		return nbTable;
 	}
+	
+	public int getNbrPlaceTotalRoom() throws SQLException {
+		int nbrPlaceTotal = 0;
+		String queryTable = "SELECT SUM(nbr_chaise) AS somme_nbr_chaise FROM tables;";
+		PreparedStatement pstTable = this.conn.prepareStatement(queryTable);
+		ResultSet rs = pstTable.executeQuery();
+		if(rs.next()) {
+			nbrPlaceTotal = rs.getInt(1);
+		}
+		return nbrPlaceTotal;
+	}	
+	
+	public int getNbrPlaceDispoRoom(LocalDate dateSelected) throws SQLException {
+		int nbrPlaceDispo = 0;
+		String queryTable = "SELECT SUM(t.nbr_chaise) AS somme_nbr_chaise "
+				+ " FROM tables t"
+				+ " LEFT JOIN reservation r ON t.id_table = r.id_table AND r.date = '" + dateSelected + "'" 
+				+ " WHERE r.id_reservation IS NULL;";
+		PreparedStatement pstTable = this.conn.prepareStatement(queryTable);
+		ResultSet rs = pstTable.executeQuery();
+		if(rs.next()) {
+			nbrPlaceDispo = rs.getInt(1);
+		}
+		return nbrPlaceDispo;
+	}	
 }

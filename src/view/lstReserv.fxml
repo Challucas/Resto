@@ -17,12 +17,13 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <ListView fx:id="listViewReservBDD" layoutX="522.0" layoutY="245.0" prefHeight="486.0" prefWidth="447.0" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <ListView fx:id="listViewReservBDD" layoutX="522.0" layoutY="245.0" prefHeight="398.0" prefWidth="447.0" style="-fx-background-color: transparent; -fx-text-fill: white;" />
             <Label layoutX="588.0" layoutY="199.0" text="Réservations acceptées" textFill="WHITE">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
+            <Label fx:id="labelError" layoutX="535.0" layoutY="661.0" prefHeight="76.0" prefWidth="394.0" textFill="WHITE" />            
          </children>
       </AnchorPane>
    </center>

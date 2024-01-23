@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,11 +47,15 @@ public class LstReservController implements Initializable{
     @FXML
     private ImageView wallpaper;
     
+    @FXML Label labelError;
+    
     LstReservModele listModel;
     ConnectModel model;
     ClientModel clientModel;
     ReservationModel reservationModel;
     TableModel tableModel;
+    
+    CreateReservFormController createReservFormController;
     
     private Integer nbrPeople;
     private LocalDate dateSelected;
@@ -77,6 +82,8 @@ public class LstReservController implements Initializable{
 			reservationModel = new ReservationModel(model.getConnect());
 			tableModel = new TableModel(model.getConnect());
 			this.listModel = new LstReservModele(model.getConnect());
+			this.createReservFormController = new CreateReservFormController();
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +160,12 @@ public class LstReservController implements Initializable{
 			@Override
             public void accept(ButtonType buttonType) {
                 if (buttonType == validateButton) {
-                	LstReservController.this.validateReservWeb(selectedItem);
+                	try {
+						LstReservController.this.validateReservWeb(selectedItem);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 } else if (buttonType == delateButton) {
                 	if( typeReserv == "ReservBDD") {
                 		LstReservController.this.reservationModel.deleteReservationBDD(selectedItem);                		
@@ -170,35 +182,38 @@ public class LstReservController implements Initializable{
     }
     
     //TODO ADD Reservation in BDD
-    private void validateReservWeb(String selectedItem) {
+    private void validateReservWeb(String selectedItem) throws SQLException {
 	    String[] champs = selectedItem.split("\\s*\\|\\s*");
 	    if(champs.length == 5 ) {
 	    	insertForProfessionnel(champs[0], champs[1]);
-	    	
-	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	        LocalDate dateReserv = LocalDate.parse(champs[3], formatter);
-	    	this.dateSelected = dateReserv;
-	    	
-	        int nbrPer = Integer.parseInt(champs[4].trim());
-	    	this.nbrPeople = nbrPer;
 	    }
 	    else if(champs.length == 6) {
 	    	insertForParticulier(champs[0], champs[1], champs[2]);
-	    	
-	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	        LocalDate dateReserv = LocalDate.parse(champs[4], formatter);
-	    	this.dateSelected = dateReserv;
-	    	
-	    	int nbrPer = Integer.parseInt(champs[5].trim());
-	    	this.nbrPeople = nbrPer;
 	    }
 	    
-	    try {
-			goToRoom();
-    		this.reservationModel.deleteReservationWeb(selectedItem);                		                		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    LocalDate dateReserv = LocalDate.parse(champs[champs.length -2], formatter);
+	    this.dateSelected = dateReserv;
+	    
+	    this.nbrPeople = Integer.parseInt(champs[champs.length -3].trim());;
+	    int nbrPlaceDispo = this.tableModel.getNbrPlaceDispoRoom(this.dateSelected);
+    	if(this.nbrPeople > this.tableModel.getNbrPlaceTotalRoom()) {
+			this.labelError.setText("Le nombre maximum de place dans le restaurant est de 22");
+        }
+    	else if( this.nbrPeople > nbrPlaceDispo)
+    	{
+    		this.labelError.setText("Pour cette date, le nombre de place dispo dans le \n restaurant est de " + nbrPlaceDispo);    		
+    	}
+    	else {
+    		try {
+    			goToRoom();
+    			this.reservationModel.deleteReservationWeb(selectedItem);                		                		
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		
+    	}
+	    
     }
     
     
