@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -61,6 +63,9 @@ public class RoomController implements Initializable{
     @FXML
     private ImageView btnValidation;
     
+    @FXML
+    private Label labelError;
+    
     
     private LocalDate dateSelected;
     private int nbrPeople;
@@ -74,6 +79,7 @@ public class RoomController implements Initializable{
     Client currentClient = new Client();
     Part currentPart = new Part();
     Pro currentPro = new Pro();
+    Reservation reservation = new Reservation();
     
     private static final int idTableFourPlace1 = 1;
     private static final int idTableFourPlace2 = 2;
@@ -142,29 +148,43 @@ public class RoomController implements Initializable{
     
     public void setNbrPeople(int nbr) {
     	this.nbrPeople = nbr;
+    	reservation.setNbrPersonne(this.nbrPeople);
     }
     
     @FXML
     void validReservation(MouseEvent event) throws IOException {
     	createClient(this.currentPro, this.currentPart);
-    	if(this.currentPart.getNom() != null) {
-    		this.clientModel.insertClient(this.currentPart.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
-    	}
-    	
-    	if(this.currentPro.getNomSociete() != null) {
-    		this.clientModel.insertClient(this.currentPro.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
-    	}
-    	int idClient = this.clientModel.getClientByIdProPart(this.idTypeClient);
-    	this.currentClient.setIdClient(idClient);
     	
     	ArrayList<Integer> choosedTable = tableSelected();  
-    	for(Integer idTable : choosedTable) {		
-    		Table table = this.tableModel.getIdTable(idTable);
-    		Reservation reservation = createReservation(table);
-    		this.reservationModel.insertReservation(reservation);
-    	}
+    	try {
+    		int nbrPlaceChoosed = this.tableModel.getNbrPlaceChoosed(choosedTable);
+    		if(this.reservation.getNbrPersonne() > nbrPlaceChoosed) {
+    			this.labelError.setText("Merci de choisir plus de table pour avoir le \n nombre de place suffisant");
+    		}
+    		else {
+    	    	if(this.currentPart.getNom() != null) {
+    	    		this.clientModel.insertClient(this.currentPart.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	    	}
+    	    	
+    	    	if(this.currentPro.getNomSociete() != null) {
+    	    		this.clientModel.insertClient(this.currentPro.getTelephone(), this.currentClient.getIdProPart(), this.currentClient.getIsParticulier());
+    	    	}
+    	    	int idClient = this.clientModel.getClientByIdProPart(this.idTypeClient);
+    	    	this.currentClient.setIdClient(idClient);
+    	    	
+    	    	for(Integer idTable : choosedTable) {		
+    	    		Table table = this.tableModel.getIdTable(idTable);
+    	    		this.reservation = createReservation(table);
+    	    		this.reservationModel.insertReservation(this.reservation);
+    	    	}
+    	    	
+    	    	goToHome(event);
+    		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
-    	goToHome(event);
     }
     
     private Client createClient(Pro pro, Part part) {

@@ -49,6 +49,7 @@
             <CheckBox fx:id="tableFourPlace2" layoutX="435.0" layoutY="359.0" mnemonicParsing="false" opacity="0.0" prefHeight="218.0" prefWidth="132.0" />
             <CheckBox fx:id="tableEightPlace" layoutX="616.0" layoutY="193.0" mnemonicParsing="false" opacity="0.0" prefHeight="214.0" prefWidth="315.0" />
             <CheckBox fx:id="tableSixPlace" layoutX="665.0" layoutY="501.0" mnemonicParsing="false" opacity="0.0" prefHeight="203.0" prefWidth="217.0" />
+            <Label fx:id="labelError" layoutX="105.0" layoutY="288.0" prefHeight="52.0" prefWidth="403.0" textFill="RED" />            
          </children>
       </AnchorPane>
    </center>
